@@ -1,0 +1,36 @@
+<div data-class="NotchShellMenu" data-key="viewroot" data-bind-$caption="{read source=static text='Tools list'}">
+	
+	<div data-bind-text="{read service=NotchShellApp path=$desktopmodule}"></div>
+	<div data-key="viewmode" data-class="SelectableRepeater identification='mode' selectedCssClass='f_select_item_selected'" data-bind-$items="{read source=__view path=$viewmodes}">
+	<img data-class="ImageX modulename='notchshell' basePath='$images/'" 
+		data-bind-elementtitle="{read path=mode}" 
+		data-bind-$src="{read path=icon}"
+		style="width:2em;height:2em; margin:2px;"
+		/>
+	</div>
+	
+	<div data-class="NotchShellComponent_ShortcutsDir dirpath='startmenu' caption='Start menu'" 
+		data-bind-$mode="{read source=__view/viewmode path=$value readdata=__view/viewmode:$activatedevent}"
+		data-on-$openevent="{bind service=NotchShellApp path=OpenShortcut}"></div>
+	
+	<hr/>
+	
+	<hr />
+	
+	<div data-class="NotchShellComponent_ShortcutsDir dirpath='startmenu' caption='Start menu' mode='icons'"></div>
+	
+	
+	<h4 style="background-color: black; color: white;">Start menu</h4>
+	<div class="c_vmenu" data-class="Repeater" data-bind-$items="{read source=__view path=$startmenu}">
+		<div style="cursor: pointer;" class="c_vmenu_item" data-on-click="{bind service=NotchShellApp path=OpenShortcut}">
+			<div data-class="NotchShellApp_IconComponent @backupicon={read source=__view path=$backupicon}" data-bind-$icon="{read path=value.$icon}" style="width: 32px;height:32px; float:left;"></div>
+			<div class="c_vmenu_text">
+				<h4 data-bind-text="{read path=key}"></h4>
+				<p data-bind-text="{read path=value.$description}"></p>
+				<em style="color:#808080;" data-bind-text="{read path=value.$script}"></em>
+				
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+</div>

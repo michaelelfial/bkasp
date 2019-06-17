@@ -1,0 +1,81 @@
+<div data-class="CardOpener" data-root="root" data-key="viewroot" class="c_card_opener">
+
+    <table class="f_full_width" data-class="Base" data-context="{bind source=static object=object}" data-key="cardopener">
+        <thead>
+            <tr>
+                <td style="min-width:630px; width:630px; max-width:650px;">
+                    <span class="c_card_opener_head_span">Enter Card Location To Open Card: </span>
+                </td>
+
+                <td data-class="Panel" data-key="favedits" style="min-width:330px; width: auto; padding-right:35px; text-align:right;" >
+                    <span class="c_card_opener_head_span" style="margin:0px 4px 0 0; ">Favorites </span>
+                    <img data-class="ImageX"   alt="" style="padding:0; margin:0;padding-left: 31px;cursor:pointer; margin-bottom:-3px;" 
+                                 width="15" height="15"
+                                 data-bind-$src="{read source=static text='/img/edit_desktopname_icon.png'}" 
+                                 data-on-click="{bind source=viewroot path=EditFavs}" 
+                                 data-bind-elementvisible="{read source=viewroot path=favedit format=InverseFormatter}" />
+                    <div class="c_card_opener_img_save f_display_none" data-bind-elementvisible="{read source=viewroot path=favedit}" style="margin:0; padding:2px;display:inline-block; height:15px; margin-bottom:-2px; width:50px; border:none;">
+                        <img style="padding: 0 2px;" width="17" height="17" data-class="ImageX" alt="" data-bind-$src="{read source=static text='/img/save_card_icon.png'}"  data-on-click="{bind source=viewroot path=SaveFavs}" />
+                        <img style="padding: 0 2px;" width="17" height="17" data-class="ImageX" alt="" data-bind-$src="{read source=static text='/img/cancel_icon.png'}"  data-on-click="{bind source=viewroot path=OnFavCancel}" />
+                    </div>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="c_card_opener_link_td">
+                    <input type="text" class="c_card_opener_input" data-bind-val="{bind path=url}" data-on-keypress="{bind source=viewroot path=onKeypress}"/>
+                    <input type="button" class="client_tools_buttons" value="Open view" data-on-click="{bind source=viewroot path=OnOpenCard}" />
+                </td>
+                <td data-class="Panel" data-key="faveditsrepeater" class="c_card_opener_fav">
+                    <div data-class="DualTemplate #dynamicSwitch='1'" data-bind-$alternatetemplate="{read source=viewroot path=favedit}" style="position:relative;"> 
+                        <div data-class="Repeater" data-bind-$items="{read source=viewroot path=favorites}" data-key="default">
+                            <input type="button" class="c_card_opener_buttons" data-bind-val="{read path=title}" data-bind-elementtitle="{read path=link}"data-behavior="{CCardLinkBehavior @baseurl={read path=link} }" />
+                        </div>
+                        <div data-key="alternate" class="c_card_opener_fav_edit">
+                            <img data-class="ImageX" alt="" data-bind-$src="{read source=static text='/img/add_desktop_icon.png'}"  data-on-click="{bind source=viewroot path=OnAddFav}" class="f_float_left cursor_pointer"/>
+                            <div data-class="Repeater" data-bind-$items="{read source=viewroot path=favorites}">
+                                <div class="c_card_opener_edit_addnew">
+                                    <span>Alias</span>
+                                    <input type="text" data-bind-val="{bind path=title}" />
+                                    <span>Link:</span>
+                                    <input type="text" data-bind-val="{bind path=link}" />
+                                    <img width="15" height="15" data-class="ImageX" alt="" data-bind-$src="{read source=static text='/img/validation_incorrect.png'}"  data-on-click="{bind source=viewroot path=OnDelFav}" class="cursor_pointer"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <br/>
+    <hr />
+
+    <table data-class="Repeater storeIndexIn='idx'" data-bind-$items="{read source=viewroot path=history}" class="f_full_width">
+            <tr class="c_card_opener_main_his" data-key="url_container" data-on-mouseover="{bind source=viewroot path=OnRowHover}" data-on-mouseleave="{bind source=viewroot path=OnRowHoverout}">
+                <td style="width:30px;">
+                    <img data-class="ImageX"   alt="" style="padding-left: 10px;cursor:pointer" data-bind-$src="{read source=static text='/img/delete__icon.png'}" data-on-click="{bind source=viewroot path=DeleteCurrent parameter='idx'}" />                                
+                </td>
+                <td style="width:auto;">
+                    <span data-key="card_link" style="padding-left:10px;cursor:pointer; overflow:visible; white-space:nowrap" data-bind-text="{read}" data-behavior="{CCardLinkBehavior @baseurl={read} }" data-on-click="{bind source=viewroot path=HistoryOpen}"></span>    
+                    <input data-key="edit_field" type="text" data-bind-val="{bind}" style="width:50%; min-width:500px; padding-left:10px; border-radius:5px;" class="c_card_opener_edit f_display_none"/>
+                </td>
+                <td style="width:70px;">
+                    <div class="c_card_opener_img_save f_display_none">
+                        <img data-class="ImageX" alt="" data-bind-$src="{read source=static text='/img/save_card_icon.png'}"  data-on-click="{bind source=viewroot path=OnRowSave parameter=idx}" />
+                        <img data-class="ImageX" alt="" data-bind-$src="{read source=static text='/img/cancel_icon.png'}"  data-on-click="{bind source=viewroot path=OnRowCancel parameter='idx'}" />
+                    </div> 
+                    <img data-class="ImageX" class="c_card_opener_img_edit" alt="" style="padding-right: 10px;cursor:pointer; float:right;margin-left:20px ;visibility:hidden;" width="15" height="15" data-bind-$src="{read source=static text='/Content/Images/MenuPhotos/edit_desktopname_icon.png'}"  data-on-click="{bind source=viewroot path=EditCurrent parameter='idx'}" />
+                </td>
+            </tr>
+    </table>
+    <hr />
+    <input type=button class="client_tools_buttons" value="Clear History" data-on-click="{bind source=viewroot path=OnClearHistoryClick}" />
+    <p style="min-width:810px;">
+        <input type="text" data-key="commandtext" style="width:700px" value="" data-on-keypress="{bind source=viewroot path=OnExecuteKeyCommand}"/>
+        <input type="button" class="client_tools_buttons" value="Execute" data-on-click="{bind source=viewroot path=OnExecuteCommand}" />
+    </p>
+    
+</div>

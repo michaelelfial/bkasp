@@ -1,0 +1,39 @@
+<div data-class="SysToolsBindingsViewer" data-key="viewroot">
+	<h4 data-bind-text="{read path=caption}"></h4>
+	<span data-class="SysToolsBindingsBrowser #ignoreBorder='1'" data-bind-$node="{read source=parentcontext path=data}" style="font-weight:bold;">
+	
+		<div data-class="TemplateSwitcher" data-bind-$item="{read source=__control path=$node}" data-key="nodecontent"
+											data-on-$select="{bind source=__control path=TemplateSelector}">
+			<span data-key="null">null</span>
+			<span data-key="border">(binding border)</span>
+			<span data-key="bindnode"> 
+				<span data-class="SysToolsBindingsBrowser" data-bind-$node="{read}">
+					<span data-class="DualTemplate"
+						 data-key="datanode" 
+						 data-bind-$item="{read source=static object=object}">
+						<a href="#" data-key="default" data-on-click="{bind source=datanode path=ToggleTemplate}">[+] {...}</a> 
+						<span data-key="alternate">
+							<a href="#" data-on-click="{bind source=datanode path=ToggleTemplate}">[-]
+								<span data-bind-text="{read source=__control path=$node customformat=__control:TypeFormatter}"></span>
+							</a> (<a href="#" data-on-click="{bind source=__control path=OnOpenNodeDC}">$data</a>)
+								 (<a href="#" data-on-click="{bind source=__control path=OnOpenNode}">node</a>)
+								 (element: &lt;<span data-bind-text="{read source=__control path=$node customformat=__control:TagFormatter}"></span>&gt;)
+							{
+								<div data-class="Repeater" data-bind-$items="{read source=__control path=$nodebindings}" style="margin-left:16px;" data-async="I100">
+									<div>
+										<span data-bind-text="{read customformat=__control:ExpressionFormatter}" data-on-click="{bind source=__control path=HighlightToggle}" style="cursor:pointer"></span>
+									</div>
+								</div>
+								<div data-class="Repeater" data-bind-$items="{read source=__control path=$nodedescendants}" style="margin-left:16px;" data-async="I100">
+									<div data-class="TemplateSwitcher templateSource='nodecontent'" data-bind-$item="{read}" data-key="nodecontent"
+											data-on-$select="{bind source=__control path=TemplateSelector}">
+									</div>
+								</div>
+							}
+						</span>
+					</span>
+				</span>
+			</span>
+		</div>
+	</span>
+</div>

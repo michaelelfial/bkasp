@@ -1,0 +1,20 @@
+{
+	ismultiple: false,
+	select: {
+		data: {}
+	},
+	subnodes: {
+		first: {
+			ismultiple: false,
+			view: "ajax1",
+			select: {
+				data: {
+					cmdline: "innewapp 'CmdsDemoTestApp' main",
+					B: "B",
+					C: "C"
+				}
+			}
+		}
+		
+	}
+}

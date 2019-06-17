@@ -1,0 +1,138 @@
+{ CLASS:
+    (string)ProgID=newObjects.composite.SQLiteTable
+    (string)VerProgID=newObjects.composite.SQLiteTable.1
+    (string)ClassID={08D49A07-C6B8-4730-9B6F-BDF169EAB450}
+    (string)ClassName=Composite SQLiteTable Object
+    (string)Threading=Both
+} CLASS;
+{ OPTIONS:
+	(string)ContextName=Context
+	(string)DefaultScriptLanguage=VBScript
+} OPTIONS;
+{ COMPONENTS:
+    { ValuesCollection:
+        (string)Type=COM
+        (string)Class={94A837CE-193F-11D5-999C-0040332BA2EA}
+        (int)Connect=0
+        { MEMBERS:
+            { Values:
+                (int)DISPID=0
+                (string)InternalName=Item
+                (int)Type=3
+            } Values;
+            { Set:
+                (int)DISPID=101
+                (string)InternalName=Set
+                (int)Type=4
+            } Set;
+        } MEMBERS;
+    } ValuesCollection;
+    { MainScript:
+        (string)Type=SCRIPT
+        (string)Language=VBScript
+        (string)File=SQLiteTable.vbs
+        (int)Connect=1
+        { MEMBERS:
+            { ComponentsPath:
+                (int)DISPID=1
+                (string)InternalName=ComponentsPath
+                (int)Type=3
+            } ComponentsPath;
+            { db:
+                (int)DISPID=2
+                (string)InternalName=db
+                (int)Type=3
+            } db;
+            { LastError:
+                (int)DISPID=3
+                (string)InternalName=LastError
+                (int)Type=2
+            } LastError;
+            { IsTemporary:
+                (int)DISPID=4
+                (string)InternalName=IsTemporary
+                (int)Type=3
+            } IsTemporary;
+            { TableName:
+                (int)DISPID=5
+                (string)InternalName=TableName
+                (int)Type=3
+            } TableName;
+            { RowID:
+                (int)DISPID=7
+                (string)InternalName=RowID
+                (int)Type=2
+            } RowID;
+            { Filter:
+                (int)DISPID=8
+                (string)InternalName=Filter
+                (int)Type=3
+            } Filter;
+            { Clear:
+                (int)DISPID=9
+                (string)InternalName=ClearDefinition
+                (int)Type=7
+            } Clear;
+            { Open:
+                (int)DISPID=10
+                (string)InternalName=ReadFromDB
+                (int)Type=7
+            } Open;
+            { AddColumn:
+                (int)DISPID=11
+                (string)InternalName=AddColumn
+                (int)Type=7
+            } AddColumn;
+            { DelColumn:
+                (int)DISPID=12
+                (string)InternalName=DelColumn
+                (int)Type=7
+            } DelColumn;
+            { Column:
+                (int)DISPID=13
+                (string)InternalName=GetColumnInfo
+                (int)Type=2
+            } Column;
+            { ColumnCount:
+                (int)DISPID=14
+                (string)InternalName=ColumnCount
+                (int)Type=2
+            } ColumnCount;
+            { AddNew:
+                (int)DISPID=15
+                (string)InternalName=AddNew
+                (int)Type=7
+            } AddNew;
+            { Update:
+                (int)DISPID=16
+                (string)InternalName=Update
+                (int)Type=7
+            } Update;
+            { Move:
+                (int)DISPID=17
+                (string)InternalName=ReadData
+                (int)Type=7
+            } Move;
+            { EOF:
+                (int)DISPID=18
+                (string)InternalName=EOF
+                (int)Type=2
+            } EOF;
+            { CreateTable:
+                (int)DISPID=19
+                (string)InternalName=CreateTable
+                (int)Type=7
+            } CreateTable;
+            { ChangeTable:
+                (int)DISPID=20
+                (string)InternalName=ChangeTable
+                (int)Type=7
+            } ChangeTable;
+            { Dbg:
+                (int)DISPID=100
+                (string)InternalName=Dbg
+                (int)Type=7
+            } Dbg;
+        } MEMBERS;
+    } MainScript;
+} COMPONENTS;

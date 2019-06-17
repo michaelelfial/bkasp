@@ -1,0 +1,14 @@
+<div data-class="BkUrl_Test1_View">
+	BkURL test ground
+	<br/>
+	Separate tests for individual classes
+	<fieldset data-context-border="true" data-key="BkUrlScheme">
+		<legend>BkUrlScheme</legend>
+		<input type="text" data-bind-val="{bind source=__view path=$scheme writedata=input}" />
+		<br/>
+		<input data-key="tostring" type="button" value="toString"/><span data-bind-text="{read source=__view path=$schemetostr readdata=BkUrlScheme/tostring:click,__view:$updateevent}"></span>
+	</fieldset>
+	<hr/>
+	
+	
+</div>

@@ -1,0 +1,5 @@
+/*
+	
+*/
+
+//SysToolsApp.hostedwindowtemplate = "BindKraft/hostedwindowtemplate";

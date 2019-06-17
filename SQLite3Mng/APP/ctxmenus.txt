@@ -1,0 +1,197 @@
+POPUP, &Edit, CtxMenuEdit
+    ITEM, &Undo, OnEdit, Undo
+    SEPARATOR
+    ITEM, Cu&t, OnEdit, Cut
+    SEPARATOR
+    ITEM, &Copy, OnEdit, Copy
+    ITEM, &Paste, OnEdit, Paste
+    SEPARATOR
+    ITEM, Select &All, OnEdit, All
+POPUP END
+POPUP, &Edit, CtxMenuEditSQL
+    ITEM, &Undo, OnEdit, Undo
+    SEPARATOR
+    ITEM, Cu&t, OnEdit, Cut
+    SEPARATOR
+    ITEM, &Copy, OnEdit, Copy
+    ITEM, &Paste, OnEdit, Paste
+    SEPARATOR
+    ITEM, Select &All, OnEdit, All
+    SEPARATOR
+    POPUP, Insert &Date/Time function
+        ITEM, ParseOleDate, OnInsert, ParseOleDate( )
+        SEPARATOR
+        ITEM, OleDateTime, OnInsert, OleDateTime( )
+        ITEM, OleDate, OnInsert, OleDate( )
+        ITEM, OleTime, OnInsert, OleTime( )
+        SEPARATOR
+        ITEM, OleDay, OnInsert, OleDay( )
+        ITEM, OleMonth, OnInsert, OleMonth( )
+        ITEM, OleYear, OnInsert, OleYear( )
+        ITEM, OleHour, OnInsert, OleHour( )
+        ITEM, OleMinute, OnInsert, OleMinute( )
+        ITEM, OleSecond, OnInsert, OleSecond( )
+        ITEM, OleWeekDay, OnInsert, OleWeekDay( )
+        SEPARATOR
+        ITEM, OleDateAdd, OnInsert, OleDateAdd( )
+        ITEM, OleDateDiff, OnInsert, OleDateDiff( )
+    POPUP END
+    POPUP, Insert &Session parameter function
+        ITEM, Parameter, OnInsert, Parameter( )
+        SEPARATOR
+        ITEM, RefDate, OnInsert, RefDate()
+        ITEM, RefDateSys, OnInsert, RefDateSys()
+        SEPARATOR
+        ITEM, CallObject, OnInsert, CallObject( )
+    POPUP END
+    POPUP, Insert &Core SQLite function
+        ITEM, abs, OnInsert, abs( )
+        ITEM, coalesce, OnInsert, coalesce( )
+        ITEM, ifnull, OnInsert, ifnull( )
+        ITEM, last_insert_rowid, OnInsert, last_insert_rowid()
+        ITEM, length, OnInsert, length( )
+        ITEM, lower, OnInsert, lower( )
+        ITEM, upper, OnInsert, upper( )
+        ITEM, max, OnInsert, max( )
+        ITEM, min, OnInsert, min( )
+        ITEM, nullif, OnInsert, nullif( )
+        ITEM, quote, OnInsert, quote( )
+        ITEM, random, OnInsert, random()
+        ITEM, round, OnInsert, round( )
+        ITEM, sqlite_version, OnInsert, sqlite_version()
+        ITEM, substr, OnInsert, substr( )
+        ITEM, typeof, OnInsert, typeof( )
+    POPUP END
+    POPUP, Insert &Core SQLite aggregate function
+        ITEM, avg, OnInsert, avg( )
+        ITEM, count, OnInsert, count( )
+        ITEM, max, OnInsert, max( )
+        ITEM, min, OnInsert, min( )
+        ITEM, sum, OnInsert, sum( )
+    POPUP END
+    POPUP, Insert &Statement
+        ITEM, SELECT, OnInsert, SELECT
+        ITEM, INSERT, OnInsert, INSERT INTO
+        ITEM, UPDATE, OnInsert, UPDATE
+        ITEM, DELETE, OnInsert, DELETE
+        SEPARATOR
+        ITEM, CREATE TABLE, OnInsert, CREATE TABLE
+        ITEM, CREATE VIEW, OnInsert, CREATE VIEW
+        ITEM, CREATE INDEX, OnInsert, CREATE INDEX
+        ITEM, CREATE TRIGGER, OnInsert, CREATE TRIGGER
+        SEPARATOR
+        ITEM, DROP TABLE, OnInsert, DROP TABLE
+        ITEM, DROP VIEW, OnInsert, DROP VIEW
+        ITEM, DROP INDEX, OnInsert, DROP INDEX
+        ITEM, DROP TRIGGER, OnInsert, DROP TRIGGER
+        SEPARATOR
+        ITEM, BEGIN TRANSACTION, OnInsert, BEGIN TRANSACTION
+        ITEM, COMMIT TRANSACTION, OnInsert, COMMIT TRANSACTION
+        ITEM, ROLLBACK TRANSACTION, OnInsert, ROLLBACK TRANSACTION
+        SEPARATOR
+        ITEM, EXPLAIN, OnInsert, EXPLAIN
+        SEPARATOR
+        ITEM, VACUUM, OnInsert, VACUUM
+        SEPARATOR
+        ITEM, ATTACH DATABASE, OnInsert, ATTACH DATABASE
+        ITEM, DETACH DATABASE, OnInsert, DETACH DATABASE
+    POPUP END
+    POPUP, Insert &Pragma
+        ITEM, PRAGMA table_info, OnInsert, PRAGMA table_info(table-name);
+        ITEM, PRAGMA index_list, OnInsert, PRAGMA index_list(table-name);
+        ITEM, PRAGMA index_info, OnInsert, PRAGMA index_info(index-name);
+        ITEM, PRAGMA database_list, OnInsert, PRAGMA database_list;
+    POPUP END
+    POPUP, Insert &Select element
+        ITEM, ALL, OnInsert, ALL
+        ITEM, DISTINCT, OnInsert, DISTINCT
+        SEPARATOR
+        ITEM, FROM, OnInsert, FROM
+        SEPARATOR
+        ITEM, LEFT, OnInsert, LEFT
+        ITEM, RIGHT, OnInsert, RIGHT
+        ITEM, OUTER, OnInsert, OUTER
+        ITEM, INNER, OnInsert, INNER
+        ITEM, JOIN, OnInsert, JOIN
+        SEPARATOR
+        ITEM, WHERE, OnInsert, WHERE
+        SEPARATOR
+        ITEM, GROUP BY, OnInsert, GROUP BY
+        ITEM, UNION, OnInsert, UNION
+        ITEM, UNION ALL, OnInsert, UNION ALL
+        ITEM, INTERSECT, OnInsert, INTERSECT
+        ITEM, EXCEPT, OnInsert, EXCEPT
+        ITEM, HAVING, OnInsert, HAVING
+        ITEM, ORDER BY, OnInsert, ORDER BY
+        SEPARATOR
+        ITEM, LIMIT, OnInsert, LIMIT
+        ITEM, OFFSET, OnInsert, OFFSET
+    POPUP END
+    POPUP, Insert &Other element
+        ITEM, ISNULL, OnInsert, ISNULL
+        ITEM, NOTNULL, OnInsert, NOTNULL
+        ITEM, BETWEEN, OnInsert, BETWEEN
+        ITEM, WHEN, OnInsert, WHEN
+        ITEM, TEHN, OnInsert, THEN
+        ITEM, ELSE, OnInsert, ELSE
+        ITEM, LIKE, OnInsert, LIKE
+        ITEM, NOT, OnInsert, NOT
+        ITEM, TEMPORARY, OnInsert, TEMPORARY
+    POPUP END
+    POPUP, Insert &Type name
+        ITEM, NUMERIC, OnInsert, NUMERIC
+        ITEM, INTEGER, OnInsert, INTEGER
+        ITEM, SMALLINT, OnInsert, SMALLINT
+        ITEM, DATE, OnInsert, DATE
+        ITEM, TIME, OnInsert, TIME
+        ITEM, DOUBLE, OnInsert, DOUBLE
+        ITEM, FLOAT, OnInsert, FLOAT
+        ITEM, SINGLE, OnInsert, SINGLE
+        ITEM, SHORT, OnInsert, SHORT
+        ITEM, LONG, OnInsert, LONG
+        ITEM, DATETIME, OnInsert, DATETIME
+        ITEM, INT, OnInsert, INT
+        ITEM, BYTE, OnInsert, BYTE
+        ITEM, BOOLEAN, OnInsert, BOOLEAN
+        SEPARATOR
+        ITEM, TEXT, OnInsert, TEXT
+        ITEM, MEMO, OnInsert, MEMO
+    POPUP END
+POPUP END
+POPUP, &Table, CtxMenuTable
+    ITEM, &Open, OnOpenTable, TableName
+    ITEM, Table &design, OnDefTable2, TableName
+    ITEM, See &Definition query, OnDefTable, TableName
+    ITEM, Create &Index, OnDefTableIndex, TableName
+    SEPARATOR
+    ITEM, Create &Copy, OnCopyQry, TableName
+    ITEM, Get &Data from a copy, OnGetDataQry, TableName
+    SEPARATOR
+    ITEM, &SELECT Query, OnSelQry, TableName
+    ITEM, &INSERT Query, OnInsQry, TableName
+    ITEM, &UPDATE Query, OnUpdQry, TableName
+    ITEM, &DELETE Query, OnDelQry, TableName
+    SEPARATOR
+    ITEM, Dro&p, OnDropTable, TableName
+POPUP END
+POPUP, &View, CtxMenuView
+    ITEM, &Open, OnOpenView, TableName
+    ITEM, &Definition, OnDefView, TableName
+    SEPARATOR
+    ITEM, Dro&p, OnDropView, TableName
+POPUP END
+POPUP, &Trigger, CtxMenuTrigger
+    ITEM, &Open, OnOpenTrigger, TableName
+    SEPARATOR
+    ITEM, Dro&p, OnDropTrigger, TableName
+POPUP END
+POPUP, &Trigger, CtxMenuIndex
+    ITEM, &Open, OnOpenIndex, TableName
+    SEPARATOR
+    ITEM, Dro&p, OnDropIndex, TableName
+POPUP END
+POPUP, &Trigger, CtxMenuNote
+    ITEM, &Open, OnOpenNote, TableName
+    SEPARATOR
+    ITEM, Dro&p, OnDropNote, TableName
+POPUP END

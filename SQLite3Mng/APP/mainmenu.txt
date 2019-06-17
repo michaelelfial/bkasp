@@ -1,0 +1,44 @@
+POPUP, &File, MenuFile
+    ACCELERATED ITEM, Ctrl-O, &Open/Create Database, OnFileAction,Open
+    SEPARATOR
+    ACCELERATED ITEM, Ctrl-H, Start page (&Home), OnFileAction,Home
+    SEPARATOR
+    ACCELERATED ITEM, Ctrl-I, &Import/Export, OnFileAction,ImpExp
+POPUP END
+POPUP, &Edit, MenuEdit
+    ACCELERATED ITEM, Ctrl-Z, &Undo, OnEdit, Undo
+    SEPARATOR
+    ACCELERATED ITEM, Ctrl-X, Cu&t, OnEdit, Cut
+    SEPARATOR
+    ACCELERATED ITEM, Ctrl-C, &Copy, OnEdit, Copy
+    ACCELERATED ITEM, Ctrl-V, &Paste, OnEdit, Paste
+    SEPARATOR
+    ACCELERATED ITEM, Ctrl-A, Select &All, OnEdit, All
+POPUP END
+POPUP, &Tools, MenuTools
+    ACCELERATED ITEM, Ctrl-Alt-S, Database &Schema, OnNavMain, dbscheme.asp
+    SEPARATOR
+    ACCELERATED ITEM, Ctrl-Alt-C, SQL &Console, OnNavMain, sqlconsole.asp
+    SEPARATOR
+    ACCELERATED ITEM, Ctrl-Alt-D, Create cascaded &deletion trigger, OnNavMain, dbscheme-crdeltrigger.asp
+    SEPARATOR
+    POPUP, New & Table
+        ITEM, &Manually (using query), OnNavMain, deftable2.asp
+        ACCELERATED ITEM, Ctrl-Alt-T, &Design table, OnNavMain, deftable.asp
+    POPUP END
+    ACCELERATED ITEM, Ctrl-Alt-V, New &View, OnNavMain, defview.asp
+    ACCELERATED ITEM, Ctrl-Alt-I, New &Index, OnNavMain, defindex.asp
+    ACCELERATED ITEM, Ctrl-Alt-T, New &Trigger, OnNavMain, deftrigger.asp
+    SEPARATOR
+    ACCELERATED ITEM, Ctrl-Alt-P, Session &Parameters, OnNavMain, sessparams.asp
+    ACCELERATED ITEM, Ctrl-Alt-N, New &note, OnNavMain, note.asp
+POPUP END
+POPUP, &Help
+    ACCELERATED ITEM, F1, &Help, OnNavMain, help.asp
+    SEPARATOR
+    ITEM, About SQLite DB Manager, OnNavMain, about.asp
+    SEPARATOR
+    ITEM, ALP &License agreement, OnNavMain, la.asp
+    SEPARATOR
+    ITEM, &About ALP, OnNavMain, alp://about
+POPUP END

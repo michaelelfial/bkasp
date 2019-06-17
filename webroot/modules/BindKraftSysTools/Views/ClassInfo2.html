@@ -1,0 +1,243 @@
+<div data-class="SysInfoClass" data-key="viewroot">
+    <table class="docs_reftable">
+        <tr>
+            <th>name:</th>
+            <td data-bind-text="{read path=info.name}"></td>
+        </tr>
+        <tr>
+            <th>kind:</th>
+            <td data-bind-text="{read path=info.kind}"></td>
+        </tr>
+        <tr>
+            <th>base class:</th>
+            <td data-bind-text="{read path=info.baseclass}"></td>
+        </tr>
+        <tr>
+            <th>parents (brief):</th>
+            <td data-bind-text="{read path=info.fullchain}"></td>
+        </tr>
+        <tr>
+            <th>inheritance hierarchy:</th>
+            <td>
+                <div data-class="Repeater storeIndexIn='idx'" data-bind-$items="{read path=info.parents}">
+                    <blockquote data-bind-text="{read path=name}" class="docs_link" 
+                        data-bind-indentination="{read path=idx customformat=viewroot:fmtIndentination}" 
+                        data-on-click="{bind source=viewroot path=onShowClass}">
+                    </blockquote>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Supported protocols:</th>
+            <td>
+                <div data-class="Repeater storeIndexIn='idx'" data-bind-$items="{read path=info.protocols}">
+                    <span data-bind-text="{read path=name}" class="docs_link" style="margin-right: 10px;" 
+                        data-on-click="{bind source=viewroot path=onShowProt}">
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+	
+	<div data-class="Expander initialState='expanded'" class="f_expander">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Constructor</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Constructor</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>private</th>
+                <th>prototype</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Base" data-bind-$data="{read path=info.constructorMethod}">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td>
+					<div data-bind-text="{read path=proto}"></div>
+					<div data-class="Repeater" data-bind-$items="{read path=args}">
+						<div>
+							<strong data-bind-text="{read path=name}"></strong> - <span data-bind-text="{read path=description}"></span>
+						</div>
+					</div>
+				</td>
+                <td data-bind-html="{read path=desc format=NewLinesFormatter}"></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+	
+    <div data-class="Expander initialState='expanded'" class="f_expander">
+        <h4 data-key="InactiveHeader" class="f_expander_inactive">Fields</h4>
+        <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Fields</h4>
+        <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>private</th>
+                    <th>default</th>
+                    <th>parameter</th>
+                    <th>description</th>
+                </tr>
+            </thead>
+            <tbody data-class="Repeater" data-bind-$items="{read path=info.fields}">
+                <tr>
+                    <td data-bind-text="{read path=name}"></td>
+                    <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                    <td data-bind-text="{read path=defval}"></td>
+                    <td data-bind-text="{read path=param}"></td>
+                    <td style="white-space:normal;" data-bind-text="{read path=desc}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div data-class="Expander initialState='expanded'" class="f_expander">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Properties (pseudo properties)</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Properties (pseudo properties)</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>private</th>
+                    <th>kind</th>
+                    <th>description</th>
+                </tr>
+            </thead>
+            <tbody data-class="Repeater" data-bind-$items="{read path=info.properties}">
+                <tr>
+                    <td data-bind-text="{read path=name}"></td>
+                    <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                    <td data-bind-text="{read path=kind}"></td>
+                    <td data-bind-text="{read path=desc}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div data-class="Expander initialState='expanded'" class="f_expander">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Methods</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Method</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>private</th>
+                <th>prototype</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.methods}">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td>
+					<div data-bind-text="{read path=proto}"></div>
+					<div data-class="Repeater" data-bind-$items="{read path=args}">
+						<div>
+							<strong data-bind-text="{read path=name}"></strong> - <span data-bind-text="{read path=description}"></span>
+						</div>
+					</div>
+				</td>
+                <td data-bind-html="{read path=desc format=NewLinesFormatter}"></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div data-class="Expander initialState='expanded'" class="f_expander">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Events</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Events</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>default</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.events}">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=type}"></td>
+                <td style="white-space:normal;" data-bind-text="{read path=desc}"></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div data-class="Expander initialState='expanded'" class="f_expander">
+        <h4 data-key="InactiveHeader" class="f_expander_inactive">Static fields</h4>
+        <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Static fields</h4>
+        <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>private</th>
+                    <th>default</th>
+                    <th>parameter</th>
+                    <th>description</th>
+                </tr>
+            </thead>
+            <tbody data-class="Repeater" data-bind-$items="{read path=info.staticFields}">
+                <tr>
+                    <td data-bind-text="{read path=name}"></td>
+                    <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                    <td data-bind-text="{read path=defval}"></td>
+                    <td data-bind-text="{read path=param}"></td>
+                    <td style="white-space:normal;" data-bind-text="{read path=desc}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div data-class="Expander initialState='expanded'" class="f_expander">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Static properties (pseudo properties)</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Static properties (pseudo properties)</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>private</th>
+                    <th>kind</th>
+                    <th>description</th>
+            </thead>
+            <tbody data-class="Repeater" data-bind-$items="{read path=info.staticProperties}">
+                <tr>
+                    <td data-bind-text="{read path=name}"></td>
+                    <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                    <td data-bind-text="{read path=kind}"></td>
+                    <td data-bind-text="{read path=desc}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div data-class="Expander initialState='expanded'" class="f_expander">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Static Methods</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Static Methods</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>private</th>
+                <th>prototype</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.staticMethods}">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td>
+					<div data-bind-text="{read path=proto}"></div>
+					<div data-class="Repeater" data-bind-$items="{read path=args}">
+						<div>
+							<strong data-bind-text="{read path=name}"></strong> - <span data-bind-text="{read path=description}"></span>
+						</div>
+					</div>
+				</td>
+                <td data-bind-text="{read path=desc}"></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>

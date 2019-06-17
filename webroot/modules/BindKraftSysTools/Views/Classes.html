@@ -1,0 +1,20 @@
+<div data-class="ClassesInfoView" data-key="viewroot" class="c_devw_table">
+    <table class="c_devw_table">
+        <thead>
+            <tr>
+                <th style="cursor: pointer;" data-on-click="{bind source=viewroot path=onSortByName}">&nbsp;</th>
+                <th style="cursor: pointer;" data-on-click="{bind source=viewroot path=onSortByName}">name</th>
+                <th style="cursor: pointer;" data-on-click="{bind source=viewroot path=onSortByParent}">parent</th>
+                <th>full name</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater storeIndexIn='idx'" data-bind-$items="{read source=viewroot path=classinfos}" data-async="B500I500">
+            <tr>
+                <td class="c_devw_click" data-bind-text="{read path=idx}" data-on-click="{bind source=viewroot path=onShowClass}"></td>
+                <td class="c_devw_click" data-bind-text="{read path=$name}" data-on-click="{bind source=viewroot path=onShowClass}"></td>
+                <td data-bind-text="{read path=$baseclass}"></td>
+                <td data-bind-text="{read path=$fullchain}"></td>
+            </tr>
+        </tbody>
+    </table>	
+</div>

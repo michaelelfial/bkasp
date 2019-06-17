@@ -1,0 +1,16 @@
+<div data-class="TrivialView" data-key="viewroot" data-bind-$caption="{read source=static text='Tools list'}">
+	<div class="c_vmenu" data-class="Repeater" data-bind-$items="{read path=data}">
+		<div style="cursor: pointer;" class="c_vmenu_item" data-on-click="{bind service=SysToolsApp path=OpenView}">
+			<img data-class="ImageX modulename='systools' basePath='$images/'" 
+				data-bind-$src="{read path=icon}" 
+				style="float:left; width: 64pt;height:64pt;"
+				alt="" 
+				class="c_big_icon" />
+			<div class="c_vmenu_text">
+				<h4 data-bind-text="{read path=caption}"></h4>
+				<p data-bind-text="{read path=description}"></p>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+</div>

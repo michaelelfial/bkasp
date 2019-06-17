@@ -1,0 +1,21 @@
+<div data-class="InterfacesInfoView" data-key="viewroot" class="c_devw_table">
+    <table>
+        <thead>
+            <tr>
+                <th style="cursor: pointer;" data-on-click="{bind source=viewroot path=onSortByName}">name</th>
+                <th style="cursor: pointer;" data-on-click="{bind source=viewroot path=onSortByKind}">kind</th>
+                <th style="cursor: pointer;" data-on-click="{bind source=viewroot path=onSortByParent}">implemented by</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater storeIndexIn=idx" data-bind-$items="{read source=viewroot path=prots}">
+            <tr>
+                <td class="c_devw_click" data-bind-text="{read path=name}" data-on-click="{bind source=viewroot path=onShowProt}"></td>
+                <td data-bind-text="{read path=kind}"></td>
+                <td data-class="Repeater" data-bind-$items="{read path=implementors}" style="white-space:normal;">
+                    <span data-bind-text="{read}" data-on-click="{bind source=viewroot path=onShowClass}" style="margin-right:5px;" class="c_devw_click"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

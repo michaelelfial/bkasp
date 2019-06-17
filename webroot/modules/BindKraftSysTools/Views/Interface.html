@@ -1,0 +1,84 @@
+<div data-class="InterfaceInfoView" data-key="viewroot">
+    <table style="width: 100%" class="c_devw_table">
+        <tr>
+            <th>name:</th>
+            <td data-bind-text="{read path=info.name}"></td>
+        </tr>
+        <tr>
+            <th>kind:</th>
+            <td data-bind-text="{read path=info.kind}"></td>
+        </tr>
+        <tr>
+            <th>Does protocols exist?</th>
+            <td data-bind-text="{read path=info.valid}"></td>
+        </tr>
+        <tr>
+            <th>Implemented by:</th>
+            <td data-class="Repeater" data-bind-$items="{read path=info.implementors}" style="white-space:normal;">
+                <div data-bind-text="{read}" data-on-click="{bind source=viewroot path=onShowClass}" style="margin-right:5px;" class="c_devw_click"></div>
+            </td>
+        </tr>
+    </table>
+    <h4>Fields</h4>
+    <table style="width: 100%" class="c_devw_table">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>private</th>
+                <th>default</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.fields}">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td data-bind-text="{read path=defval}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>Properties (pseudo properties)</h4>
+    <table style="width: 100%" class="c_devw_table">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>private</th>
+                <th>kind</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.properties}">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td data-bind-text="{read path=kind}"></td>
+                <td data-bind-text="{read path=desc}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>Methods</h4>
+    <table style="width: 100%" class="c_devw_table">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>private</th>
+                <th>prototype</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.methods}">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td>
+					<div data-bind-text="{read path=proto}"></div>
+					<div data-class="Repeater" data-bind-$items="{read path=args}">
+						<div>
+							<strong data-bind-text="{read path=name}"></strong> - <span data-bind-text="{read path=description}"></span>
+						</div>
+					</div>
+				</td>
+                <td data-bind-text="{read path=desc}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

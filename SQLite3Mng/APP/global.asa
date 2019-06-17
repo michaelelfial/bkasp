@@ -1,0 +1,83 @@
+<OBJECT 
+    RUNAT=SERVER 
+    ID="db" 
+    PROGID="newObjects.sqlite3.dbutf8" 
+    SCOPE="Application"></OBJECT>
+<OBJECT 
+    RUNAT=SERVER 
+    ID="dbmandata" 
+    PROGID="newObjects.sqlite3.dbutf8" 
+    SCOPE="Application"></OBJECT>    
+<OBJECT 
+    RUNAT=SERVER 
+    ID="su" 
+    PROGID="newObjects.utilctls.StringUtilities" 
+    SCOPE="Application"></OBJECT>
+<OBJECT 
+    RUNAT=SERVER 
+    ID="sf" 
+    PROGID="newObjects.utilctls.SFMain" 
+    SCOPE="Application"></OBJECT>    
+<OBJECT 
+    RUNAT=SERVER 
+    ID="cf" 
+    PROGID="newObjects.utilctls.ConfigFile" 
+    SCOPE="Application"></OBJECT>    
+<OBJECT 
+    RUNAT=SERVER ID="thread" 
+    PROGID="newObjects.utilctls.COMScriptThread" 
+    SCOPE="Application"></OBJECT>
+<OBJECT 
+    RUNAT=SERVER ID="DBManCfg" 
+    PROGID="newObjects.utilctls.VarDictionary" 
+    SCOPE="Application"></OBJECT>
+<OBJECT 
+    RUNAT=SERVER ID="SesParamTypes" 
+    PROGID="newObjects.utilctls.VarDictionary" 
+    SCOPE="Application"></OBJECT>    
+<SCRIPT RUNAT=SERVER LANGUAGE=VBSCRIPT>
+    Sub Session_OnStart
+        ' Nothing for now - but do not delete.
+        Session("ShowTables") = 1
+        Session("ShowIndices") = 0
+        Session("ShowViews") = 0
+        Session("ShowTriggers") = 0
+    End Sub
+    Sub Application_OnStart
+        ' Configure it for convenient usage further
+        db.AutoType = True
+        db.TypeInfoLevel = 4
+        
+        SesParamTypes.Add "Null",       vbNull
+        SesParamTypes.Add "Integer",    vbLong
+        SesParamTypes.Add "Real",       vbDouble
+        SesParamTypes.Add "Date",       vbDate
+        SesParamTypes.Add "String",     vbString
+        SesParamTypes.Add "Boolean",    vbBoolean
+        SesParamTypes.Add "Currency",   vbCurrency        
+        
+        Application("DATETypes") = "DATE"
+        Application("TIMETypes") = "TIME"
+        Application("DATETIMETypes") = "DATETIME"
+        
+        Application("TYPES") = "AUTONUMBER,INTEGER,NUMERIC,TEXT,DATE,TIME,DATETIME,DOUBLE,FLOAT,INT,SMALLINT,SINGLE,BOOLEAN,REAL,BLOB"
+        
+        thread.Value.extractValues = False
+        thread.AddCreator = True
+        
+        Dim cfg
+        Set cfg = cf.Read(Server.MapPath("/dbman.cfg"))
+        Dim I
+        For I = 1 To cfg.Count
+            DBManCfg.Add cfg.Key(I), cfg(I)
+        Next
+        Dim rcnt
+        dbmandata.Open Server.MapPath("/dbman.db")
+		Set rcnt = dbmandata.Execute("select * from sqlite_master where type='table' and name='Recent'")
+		If rcnt.Count = 0 Then
+			dbmandata.Execute "CREATE TABLE Recent (ID INTEGER PRIMARY KEY,PATH TEXT, DATETIME DATETIME);"
+		End If
+        
+        ' su.AutoFormatTypes = "GgdiuxXsT"
+    End Sub
+</SCRIPT>

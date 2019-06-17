@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <style>
+            .err {
+                background-color: #FFE0E0;
+                color: #800000;
+            }
+        </style>
+        <script src="staticevents.js"></script>
+    </head>
+    <body>
+        <form>
+            <input type="text" onchange="ccStaticValidateRequired.Value(new ccStaticEvent(this,arguments[0],'change'),'err');" /><br/>
+            <select onchange="ccStaticValidateRequired.Select(new ccStaticEvent(this,arguments[0],'change'),'err');">
+                <option value=""></option>
+                <option value="1">Value 1</option>
+                <option value="2">Value 2</option>
+                <option value="3">Value 3</option>
+            </select>
+        </form>
+    </body>
+</html>

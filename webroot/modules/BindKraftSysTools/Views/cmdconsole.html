@@ -1,0 +1,36 @@
+<div data-class="CommandConsole" data-key="viewroot" style="height:100%;padding:0px;overflow-y:scroll;"
+	data-on-$datachangedevent="{bind source=self path=FocusCmdLine}{bind throw=updatecommands}"
+	data-on-click="{bind source=self path=FocusCmdLine}"
+	>
+	<div data-key="logview" style="margin:0px;">
+		<pre data-key="logview" data-class="Repeater" data-bind-$items="{read source=viewroot path=$log readdata=$log_changed,viewroot/verbose:$activatedevent}" 
+			style="margin:0px;" 
+			data-bind-jbtracecolor="{read source=viewroot path=$outputcolor}"
+			data-on-dblclick="{bind source=viewroot path=OnClear ref[clear]=self@}">
+				<span class="dbgEntry" data-bind-html="{read path=date format=DateTimeLong}" data-bind-elementvisible="{read source=viewroot/verbose path=$checked}"
+					data-bind-jbtracecolor="{read source=viewroot path=$timecolor}"></span>
+				<span data-bind-elementvisible="{read source=viewroot/verbose path=$checked}" >-&gt;</span>
+				<span class="dbgEntry" data-bind-html="{read path=cmd}" style="cursor:pointer;font-weight:bold;" data-on-click="{bind source=viewroot path=OnClickCmd}"
+					data-bind-jbtracecolor="{read source=viewroot path=$cmdcolor}"
+					data-bind-elementvisible="{read source=viewroot/verbose path=$checked}"
+					></span>
+				<div class="dbgEntry" data-bind-html="{read path=output}" 
+					data-bind-jbtracecolor="{read source=viewroot path=$outputcolor}"></div>
+		</pre>
+		<table style="width:100%;background-color:#000000;">
+			<tr>
+			<td style="width:100%">
+				<input type="text" data-key="cmdline" style="width:100%;background-color:#000088;color:#FFFF00;font-weight: bold;border: none;" 
+					data-bind-val="{bind source=viewroot path=$cmdline writedata=input readdata=$changecmdevent name=inputia}"
+					data-on-keypress="{bind source=viewroot path=OnRunCmdEnter}"
+					/>
+			</td>
+			<td><input type="button" value="Execute" data-on-click="{bind source=viewroot path=OnRunCmd}" />
+			</tr>
+		</table>
+		<div>
+			<input type="checkbox" data-class="CheckBox" data-key="verbose"/>
+			verbose
+		</div>
+	</div>
+</div>

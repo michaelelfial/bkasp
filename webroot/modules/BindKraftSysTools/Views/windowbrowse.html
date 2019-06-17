@@ -1,0 +1,132 @@
+<div data-class="TrivialView" data-key="viewroot" 
+	data-bind-$caption="{read source=static text='Windows browser (Spy++)'}"
+	data-on-$datachangedevent="{bind throw=updatecommands }"
+	>
+	<div class="moreInfoTemplate" style="display:none;" data-template-root="true">
+		<div data-class="Base" 
+		class="f_expander_body"
+		style="position: absolute;right:0px;max-height:200px;width:300px;overflow: auto;">
+		<table class="simpletable">
+			<tr>
+				<th>View</th>
+				<td>
+					<span data-bind-text="{read source=__control path=$viewtype}"></span>
+					<div data-bind-elementvisible="{read source=__control path=$hasactiveview}">
+						<a href="#" data-on-click="{bind source=__control path=ShowViewDataContext}">data context</a><br/>
+						<a href="#" data-on-click="{bind source=__control path=ShowViewObject}">everything (slow)</a><br/>
+						<a href="#" data-on-click="{bind source=__control path=ShowViewBindings}">bindings tree</a>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>Trace messages</th>
+				<td>
+					<a href="#" data-on-click="{bind source=__control path=ShowTraceMessages}">view</a>
+				</td>
+			</tr>
+			<tr>
+				<th>Create params</th>
+				<td>
+					<a href="#" data-on-click="{bind source=__control path=ShowCreateParams}">view</a>
+				</td>
+			</tr>
+			<tr>
+				<th>Window DC</th>
+				<td>
+					<a href="#" data-on-click="{bind source=__control path=ShowWindowDC}">view</a>
+				</td>
+			</tr>
+			<tr>
+				<th>Styles</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowStyles}"></td>
+			</tr>
+			<tr>
+				<th>Visible</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowInfoMethod parameter='isWindowVisible'}"></td>
+			</tr>
+			<tr>
+				<th>Material</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowInfoMethod parameter='isWindowMaterial'}"></td>
+			</tr>
+			<tr>
+				<th>Icon</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowInfoMethod parameter='get_iconpath'}"></td>	
+			</tr>
+			<tr>
+				<th>enabledwindow</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowInfoMethod parameter='get_enabledwindow'}"></td>
+			</tr>
+			<tr>
+				<th>Parent ready</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowInfoMethod parameter='isParentWindowReady'}"></td>
+			</tr>
+			<tr>
+				<th>Window rect</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowInfoMethod parameter='get_windowrect'}"></td>
+			</tr>
+			<tr>
+				<th>Client rect</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowInfoMethod parameter='get_clientrect'}"></td>
+			</tr>
+			<tr>
+				<th>Z-order</th>
+				<td data-bind-text="{read customformat=__control:FmtWindowInfoMethod parameter='get_zorder'}"></td>
+			</tr>
+			<tr>
+				<th>Services</th>
+				<td data-bind-text="{read path=provideAsServices}"></td>
+			</tr>
+		</table>
+		</div>
+	</div>
+	<div data-class="WindowBrowser">
+		<a tabindex="-1" href="#"
+			data-on-click="{bind source=__control/windows path=ToggleTemplate}">
+			<img data-class="ImageX modulename='systools'" 
+			 data-bind-$src="{read source=static text='$images/listview.png'}" 
+			 style="width:16px;height:16px;"/>
+			<span >Workspace</span>
+		</a>
+		<div data-class="DualTemplate alternateTemplate='wnds'" data-key="windows" data-bind-$item="{read source=static object=object}">
+			<div data-class="DataArea contentaddress='GetWindows' @bindhost={read source=__control}"
+				 data-parameters="connectorType='FastProcConnector'"
+				 data-key="wnds"
+				 data-bind-$startloading="{read(100) source=static number='1'}"
+				 data-context-border="true"
+				 >
+				 <div data-class="Repeater" data-async="I50"
+					  data-bind-$items="{read}" style="margin-left:16px;">
+					  <div>
+						<div data-class="WindowBrowser" data-bind-$window="{read}">
+							<a tabindex="-1" href="#"
+								data-on-click="{bind source=__control/windows path=ToggleTemplate}">
+								<img data-class="ImageX modulename='systools' basePath='$images/{img}.png'" 
+								 data-bind-$src="{read(2) source=static text=''}" 
+								 data-bind-$parameter[img]="{read(0) source=__control path=$windowicon}" 
+								 style="width:16px;height:16px;"/>
+								<span data-bind-text="{read path=$caption}"></span>
+							</a>
+							(<span data-bind-text="{read customformat=__control:FmtType}"></span>)
+							<div data-class="PopTemplate bodyTemplate='div.moreInfoTemplate' @bindhost={read source=viewroot}" 
+								data-bind-$item="{read}" style="position: relative; display: inline-block;"
+								class="f_expander"
+							>
+								<div data-key="InactiveHeader" style="cursor:pointer;" class="f_expander_inactive">
+									<b>More info</b>
+								</div>
+								<div data-key="ActiveHeader" style="cursor:pointer;" class="f_expander_active">
+									<span>More Info</span>
+								</div>
+							</div> 
+							<div data-class="DualTemplate alternateTemplate='wnds' templateSource='windows'" data-key="windows" data-bind-$item="{read source=static object=object}">
+								
+							</div>
+						</div>
+					  </div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>

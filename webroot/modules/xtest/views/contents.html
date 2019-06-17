@@ -1,0 +1,22 @@
+<div data-class="XTApp_Contents_View">
+	<div data-class="Repeater" data-bind-$items="{read}">
+	
+		<h4>
+			<span data-bind-text="{read path=id}"></span>:
+			<span data-bind-text="{read path=name}"></span>
+		</h4>
+		
+		<table style="margin-left: 20pt;">
+			<tbody data-class="Repeater" data-bind-$items="{read path=items}">
+				<tr style="cursor:pointer" data-on-click="{bind service=XTApp path=onOpenWorkView}">
+					<td>&gt;</td>
+					<td style="text-decoration: underline; color: #4040A0;" data-bind-text="{read path=name}"></td>
+				</tr>
+			</tbody>
+		</table>
+	
+	</div>
+
+
+	
+</div>

@@ -1,0 +1,11 @@
+{ SITE:
+    { FIXUP:
+        (int)OverrideDllCanUnloadNow=1
+        (int)FreeThreadedWorkerThreads=1
+    } FIXUP;
+} SITE;
+{ CONTENTGENERATORS:
+    { LIBRARIES:
+        ; From ALP 1.2 the standard modules are internal.
+    } LIBRARIES;
+} CONTENTGENERATORS;

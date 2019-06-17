@@ -1,0 +1,44 @@
+<script runat="server" language="vbscript" ID="PageCallStack">
+    Const ASPCTL_SessionStacksName = "ASPCTL_SessionStacks"
+    Function SessionStacks_Database
+        Dim dbPath
+        SessionStacks_Database = Application("ASPCTL_StacksStoreDatabase")
+    End Function
+    Function SessionStacks_IsPersistenceEnabled
+        SessionStacks_IsPersistenceEnabled = False
+        If SessionStacks_Database <> "" Then
+            If Application("SessionUserIdName") <> "" Then
+                If Application("ASPCTL_StacksPersistenceEnabled") Then
+                    SessionStacks_IsPersistenceEnabled = True
+                End If
+            End If
+        End If
+    End Function
+    
+    Sub SessionStacks_Application_OnStart
+        If Not SessionStacks_IsPersistenceEnabled Then Exit Sub
+        Dim dbPath, sdb
+        dbPath = SessionStacks_Database
+        If dbPath <> "" Then
+            Set sdb = Server.CreateObject("newObjects.sqlite3.dbutf8")
+            sdb.Open Server.MapPath(dbPath)
+            On Error Resume Next
+            sdb.Execute "CREATE TABLE PAGESTACKS (USER_ID INTEGER NOT NULL UNIQUE ON CONFLICT REPLACE, STORED DATETIME, DATA BLOB);"
+            sdb.Execute "CREATE INDEX IF NOT EXISTS PAGESTACKS_STORED ON PAGESTACKS(STORED);"
+            On Error Goto 0
+        End If
+    End Sub
+    
+    Sub SessionStacks_Session_OnStart
+        If Not SessionStacks_IsPersistenceEnabled Then Exit Sub
+        Dim dbPath, sdb
+        dbPath = SessionStacks_Database
+        If dbPath <> "" Then
+            Set sdb = Server.CreateObject("newObjects.sqlite3.dbutf8")
+            sdb.Open Server.MapPath(dbPath)
+    End Sub
+    
+    Sub SessionStacks_Session_OnEnd
+    
+    End Sub
+</script>

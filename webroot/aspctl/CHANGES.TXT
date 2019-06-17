@@ -1,0 +1,441 @@
+ASP-CTL Framework
+
+Changes log
+
+0.9 - Beta versions for internal use from 01-May-2007
+
+1.0 - Initial public release 01-June-2008 (official
+
+1.1 - 14-June-2008
+    ConvertTo, TryConvertTo, NullConvertTo now use
+    newObjects.utilctls.TypeConverter's routines
+    
+1.2 - 10-October-2008
+    Many minor updates    
+
+1.5 - 21-November-2008
+
+    The ClientScripts class and feature have been augmented drastically.
+    
+    added file: staticevents.js which contains a small base javascript 
+        library designed for use from the markup (e.g. the content 
+        generator is responsible for attaching client side event handlers
+        using onxxx atributes of HTML elements).
+        The Static library supports event object wrapper which allows
+        event object to be used on simplified browsers without such.
+        The event handlers designed to work with the lib need to follow
+        a specification.
+        The library also contains the client side code (as event handlers)
+        for the ASP-CTL built in validators.
+        
+    The ClientScripts now supports client side event registration/
+    unregistration procedures based on WEB or User Control, the control
+    needs to call the automatic client side events renderer using the
+    ClientScripts.RenderControlEventHandlers in their rendering code.
+    The event handling registration also includes an option parameter which is
+    used for non-trivial extensions. One example is registering an event 
+    handler to also run on page load for a particular control.
+    
+    The ConfirmationText feature of the buttons has been changed to use the
+    Static Events library.
+    
+    Client side validation option has been added to the CValidator. It
+    requires a routine named Client_XXXX where XXXX is the validator routine
+    for the server side. It is responsible to register the appropriate 
+    client side event handlers. The client validation is not obligatory - it
+    cannot stop the form from submitting, but it indicates to the user when
+    the current value of a control is invalid. This policy has been selected
+    because very often it is impossible to do all the validation on the client
+    and even if it is - a server validation is still the only thing to guarantee
+    consistent data.
+    
+    For the client side validation two modes are defined:
+        EnableClientValidation - normal
+        AggressiveClientValidation - extended
+    Where the second option (requires the first one) is used by the Client_XXXX
+    validator routines as an instruction to register their client side handlers
+    for events that require more frequent processing (such as onkeydown)
+
+    CValidator now supports A property EnableClientSide which is by default True.
+    If the client side validation is enabled in the global.asa or in the page 
+    the validator will register client side validators (if available for the 
+    particular validator routines), but this property allows the client side
+    validation to be disabled on particular validators.
+    
+    The CButton and CImageButton now support alternative RenderValue mode in 
+    which they keep their values in a collection in the post variables. This is
+    enabled on global level by setting UsePostVarsForButtonValues = True (can be
+    done in the global.asa too). Use this mode for applications that need to 
+    be viewed in simplified browsers (such as PIE) otherwise they might have some
+    problems with button values (depending on the size of the value in encoded form).
+    
+    The AutoPostBack feture on the controls has been updated to use the Static
+    Events library by default. The old post back routine generation mechanism
+    is left intact for use where it is more convenient - for instance in the 
+    insides of a control markup (where no event handler registration through
+    the ClientScripts.RegisterEventHandler routines is suitable). It will 
+    remain in the future versions for this reason - do not hesitate to use it
+    wherever you need it.
+    
+    A new option HideSubmitShieldMessage has been added - it disables the alert
+    message when the form submission is prevented by the full submit shield - the
+    EnableFullSubmitShield option set to true.
+    
+1.6 - 06-March-2009
+    
+    Many small updates in many controls. 
+    
+    Added post back support to CRadioList.
+    
+    The ButtonPager has been updated to use PostVariables and keep its state there
+    
+    New control OrdererList which functions much like OrdererSet but shows two 
+    listboxes filled with fields and order directions respectively. Also both
+    now support PostVariables for state preservation by default - no need to render
+    them in order to have their state preserved.
+    
+    New classes CSessionPreferences, CSessionPreference available through the 
+    global variable SessionPreferences created automatically if the aspctl-sesprefs.asp
+    is included. Help keep default settings for certain controls. They are most useful
+    for filters where the user usually wants to see the filter controls set the same way
+    he/she has set them the last time. The preferences are not preserved anywhere and
+    after the session expires they are lost.
+    
+    New feature - Page Call Stack or also called SessionStacks. This is for use with
+    pages that need to transfer the user to another page to select/enter something,
+    then return back and use the selection further. 
+    
+        Basically the page that needs to call another Prepares a Call
+        PageCallStack.PrepareCall
+        Then stores some parameters in PageCallStack.CallParameters collection
+        Performs a call to another page
+        PageCallStack.ExecuteCall page, callerTag, calleeTag
+        The called page uses PageCallStack.ReturnParameters to change or
+        add parameters and retuirns back PageCallStack.ExecuteReturn(bSuccess)
+        
+    Note aspctl-postvars.asp is now always included
+    
+1.7 - 29-March-2009
+
+    An include helper file has been created aspct-main.asp. It includes in turn all 
+    the core features - base controls, base multilanguage controle, post variables,
+    session stacks and the validators. If you decide to use it REMOVE the 
+    validators.asp from your includes because it is already included! This move
+    has been made due to the rising number of interdependent features of the framework.
+    It mitigates the difficulties when existing pages are upgraded to use new features.
+    The existing pages will continue to work as before, but some of the new features may
+    not be enabled by default. Therfore the new pages need to include only:
+    
+    <!-- #include file="aspctl/aspctl-main.asp" -->
+    
+    for the core features and then only the control groups they are going to need. See the
+    template pages for an example.
+    
+    Added multilanguage controls - CTextLang and CTextAreaLang. Both maintain a collection
+    of values instead of single value. Their Language property controls to which language
+    corresponds their Value property. In addition they support a new indexed property 
+    LanguageValue which must be used with a language id. Through it the values for any 
+    supported language are directly accessible. The controls display only the value for the
+    current language (specified by their Language property), but preserve the values for 
+    the other languages throughout post backs. Using these controls an UI that allows the
+    user to enter data in multiple languages can be constructed virtually the same way as
+    the normal single language interface. The developer must only care about two things:
+    - To provide means for language change that alters the Language property of the 
+      multilanguage controls on the form - to allow the user to see and edit their values
+      for the different languages.
+    - To load/store the values for the all supported languages when performing load/store
+      operations (usually with a database)
+      
+    To help with the multilanguage controls the framework adds:
+    - a global array SupportedLanguages which you can use to enumerate the languages:
+      For I = LBounf(SupportedLanguages) to UBound(SupportedLanguages)
+        ' Get value for a particular language
+        v = ctl.LanguageValue(SupportedLanguages(I))
+        ' Set value for a particular language
+        ctl.LanguageValue(SupportedLanguages(I)) = v
+      Next
+    - a global function IsLanguageSupported(lang) which returns false if the language
+      is not supported.
+      
+    The multilanguage controls are included by aspctl.asp and there is no need to add
+    a directive for them. They are implemented in aspctl-langctls.asp (open the file
+    to view their source for details not mentioned in the documentation).
+      
+    Note that the controls consult these global API-s and will raise an error if an 
+    unsupported language is used with them. Aside of the obvious error tracking this
+    also prevents malicious flooding the forms with values which can be used for 
+    DoS attacks if unchecked. To add support for a language use the resource editor
+    (see resedit) to edit the resource database.
+    
+    Most of the built-in validators are updated to deal with multilanguage controls.
+    In addition the CValidator class now supports AllLanguages property which if set to
+    true must be treated by validators capable of validating multilanguage conrols as
+    an instruction to validate the values for all the supported languages. Of course,
+    in most cases the validators should validate the values for the all supported 
+    languages anyway. For instance a text length validation should be applied to all
+    the values because otherwise the application can be lured to try and save incorrect
+    values. However a "required" validator may require values for some langues or for all
+    languages. Currently this property is honoured only by the RequiredValidator and if
+    false (default) causes it to require value only for the current language (The one
+    specified by the Language property of a multilanguage control), if true causes it
+    to require values for all the languages to be entered. The other validators
+    will validate all the values always. The built-in validators supporting multilanguage
+    controls are: ValidateRequired, ValidateLength, ValidateRange, ValidateType and
+    ValidateRegExp. The other built-in validators are inappropriate for text fields
+    or otherwise incapable of performing useful actions for all the languages. If a 
+    validator not supporting multilanguage controls is used with such a control it
+    will validate only the value for the current language.
+    
+    A new WEB control has been added: CLinkPager. Create it with 
+    Create_CLinkPager(controlName). It has almost the same interface as the ButtonPager,
+    but uses instead links and not buttons to show pages. However this means that this
+    control will not cause post backs! Instead it will reload the page with GET request
+    and any data from controls that do not have their PreserveInQueryString property
+    set to true will be lost. Use this control for public pages that need to be spidered
+    by search engines.
+    
+1.8 - 12-Apr-2009
+	
+	A small addition to the session preferences (SessionPreferences global object). Now
+	the controls that use it can implement a method InitSessionPreferences(vars) which 
+	is called when the preferences are requested for the first time. In this method the
+	control can initialize the preferences to default values. The vars parameter is a
+	VarDictionary (TSSection) collection in which they can write the same variables they
+	otherwise read/write through GetCtlVar/SetCtlVar.
+	
+	Bug fixed - the page scroll position restoration now works for all the major browsers,
+	that support enugh features to enable implementation.
+	
+	The session stacks now support ExecuteJump(toPage) method which redirects to another
+	page not changing anything in the stack. This way the callee can jump to another
+	page which can return to the initial caller when the digression is finished. If there
+	is at least PrepareCall call before the given moment in time the pages can set/get
+	CallParameter (in callers)/ReturnParameter (in callees) and use them for 
+	communication.
+	
+    The standard SQLite database library is now included in the aspctl directory in the 
+    file: sqlite-lib.asp. Although the features implemented there are not new they have
+    been outside the framework before. Now they are well-defined and encapsulated for
+    easy usage. A short description follows:
+    
+        The SQLite library consist of a single class - CDatabase. It can be used to access
+        single or multiple SQLite3 COM databases. A default database can be defined (see
+        the comments in the file).
+        
+        Usage pattern: 
+        
+        - The application must create an instance of the class in the page
+        scope (not session or application scope!). 
+        
+        - If session parameters are used the application must specify the name of a sub
+        which would be called to initialize them whenever a database session is opened.
+        The routine prototype is 
+        Sub <sub_name>(db) 
+        where the db is the just created database session (SQLite3 COM object). The sub
+        is supposed to set db.Parameters as needed, but it can also override some other
+        more low level database settings if needed (for instance the integer treatment
+        policies and so on).
+        
+        - The application accesses the SQLite3 COM object contained in the CDatabase
+        object through its DB property. For example:
+        Set database = New CDatabase ' global variable
+        ..... later in the application .....
+        Set results = database.DB.VExecute(....)
+        We will assume the name of the global variable is database for the exmple code
+        further in this section.
+        
+        - The distributed transaction mechanism can be used in various ways mixing low
+        and high level routines. However the recommended pattern which requires almost
+        no concern about the details is:
+        
+            Whenever a write operation is to be performed in an user control place all 
+            the database code between
+            
+            If database.BeginTransaction Then
+            On Error Resume Next
+            Err.Clear
+            
+                ... the database code goes here ...
+            
+                If database.CompleteTransaction Then
+                    ' ... if needed indicate success/failure by returning true/false
+                    ' if this is in a member function for instance.
+                End If
+            End If
+    
+            If you need to call methods on a child control it in turn must follow the 
+            same pattern which will guarantee that it will join the transaction and 
+            invalidate it if something wrong happens outside the control of the parent.
+            
+            The BeginTransaction returns true if a transaction has been started or
+            if an existing one has been joined successfuly. If there is current
+            transaction and it has already failed BeginTransaction will return false
+            to save you the trouble to perform operations that will get rolled back
+            in the end anyway.
+            
+            Whenever you need to cancel explicitly the transaction you can do this
+            by calling one of the following methods (but not both)
+            database.InvalidateTransaction
+            or
+            database.CancelTransaction(sReason)
+            The second method has a parameter in which you can pass a string describing
+            the reason. This reason will be added to the CDatabase's error messages and
+            can be displayed later (see more below). The InvalidateTransaction will not
+            add any error messages which makes it best for situations in which error
+            texts are already generated by other means (for example failed validators).
+            If in doubt check what goes to the screen and change the method call so that
+            the error messages would not overburden the user.
+            
+            The IncalidateTransaction and CancelTransaction can be called whenever you
+            want and not necessarily between the BeginTransaction and 
+            CompleteTransaction in the code of the current method. They will cancel
+            the transaction if one is opened and do nothing otherwise. One reason to
+            do so is to avoid doing unneeded work if it is already clear that something 
+            is wrong. The best example are failed validators. Thus the best way to do
+            the data writing in an user control would be:
+            
+            If Validate(Me.Name) Then
+                If database.BeginTransaction Then
+                On Error Resume Next
+                Err.Clear
+                
+                    ... the database code goes here ...
+                
+                    If database.CompleteTransaction Then
+                        ' ... if needed indicate success/failure by returning true/false
+                        ' if this is in a member function for instance.
+                    End If
+                End If
+            Else
+                database.InvalidateTransaction
+            End If
+            
+            The InvalidateTransaction will take care to cancel the transaction if the 
+            method in which this code resides is called by another control which has
+            already started a transaction. On the other hand, if this control would
+            have started the transaction nothing will happen and pointless use of
+            resources will be avoided.
+            
+            The user controls that interact with the database directly almost always
+            have one or more properties that keep their values in post variables. This
+            can be simply a database ID of a record, but depending on the needs the 
+            control may hold more such properties (the reason can be caching, holding
+            values that have no corresponding controls and so on). Many of these values
+            may need to be updated if the write operation succeeds or if you prefer the
+            other way around reverted to their previous state if the write operation 
+            fails. Actually the second approach is easier and produces solutions with
+            less code so it is recommended (but both tehcniques are supported).
+            
+            To do so the control must register with the transaction and implement a
+            method called Complete:
+            Function Complete(bSuccess, FailureValues, SuccessValues)
+            The function must return True if everything is ok and False if the 
+            completion failed somehow. Indeed it is difficult to imagine how this can
+            fail, but in case it does the error can be very hard to find so returning
+            false will cause an error that identifies the class and helps you pinpoint
+            it.
+            
+            While there is a public CDatabase.RegisterObject method that enables an
+            user control to register with the transaction it is almost never ncessary
+            to call it directly. Instead you can simply use the FailureValue and
+            the SuccessValue properties of the CDatabase class, they will automatically
+            register the calling class with the transaction. To illustrate this lets
+            take a simple, but frequent example:
+            
+            An user control that saves some data and needs to call child user conrols
+            to save related data in other tables. The child controls would need to
+            know the parent's database record's ID in order to link the entries they
+            create in other table(s). So the parent must pass the ID to them, but if
+            one of them fails it would need to return to the previous state (most 
+            likely ID=0). One can try to do this manually, but calling child controls
+            may continue in depth and even if it doesn't the child control mostlikely
+            need to do the same in turn. So if you have more than one such child 
+            control and the one that fails and cancels the transaction is not the first
+            one the first will not know to reset its Id property unless you are content
+            with writing complicated If then else statements that will make the code
+            almost an enigma.
+            
+            To avoid all that trouble you simply set the Failure or Success values and
+            leave the task for making the things right for your Complete method which
+            gets called when the transaction completes.
+            
+            If you choose to follow the reset on failure pattern this will look like:
+            
+            If database.BeginTransaction Then
+            On Error Resume Next
+            Err.Clear
+            
+                database.FailureValue(Me,"Id") = Id
+                ... do the insert ...
+                ... call the chid controls passing the Id to them ...
+            
+                If database.CompleteTransaction Then
+                    ' ... if needed indicate success/failure by returning true/false
+                    ' if this is in a member function for instance.
+                End If
+            End If
+            
+            ... somehere later in the user control's class ...
+            Public Function Complete(bSuccess, FailureValues, SuccessValues)
+                Complete = True ' Remember you need to return True!
+                If Not bSuccess Then
+                    Id = ConvertTo(vbLong, FailureValues("Id"))
+                    ' The conversion is just paranoia ;)
+                End If
+            End Function
+            
+            ' The Id property mentioned is usually defined like this:
+            Public Property Get Id
+                Id = ConvertTo(vbLong,PostVariables.GetCtlVar(Me,"Id"))
+            End Property
+            Public Property Let Id(v)
+                PostVariables.SetCtlVar Me, "Id", ConvertTo(vbLong,v)
+            End Property
+            
+            
+            What happened here is that when the last CompleteTransaction gets 
+            called (by the class that has actually started it) the Complete methods
+            of all the objects that have registered with the transaction are
+            called with bSuccess parameter indicating if the transaction has 
+            succeeded or failed and as 2 and 3-d parameter containing the values
+            previously set With FailureValue and SuccessValue respectively. Thus
+            the object get inline with the overal result of the transaction when
+            it finishes, but they may assume success while calling each other
+            and forget any concern about different intermediate outcomes. The
+            transaction architecture is designed to naturally avoid execution
+            of too much pointless code (when transaction has already failed), so 
+            no optimization is needed. As a result this simple transactional
+            system allows nested user controls (and other objects if used) to share
+            transaction and use very simple database code which is limited 
+            almost entirely to the execution of the SQL statements and passing
+            parameters to them. All the care for intermediate failures and their
+            impact over the entire operation is left to the transaction system
+            which gives the objects simple instructions what to do in the end.
+            The other important result is that user controls or other classes
+            designed this way can be re-used under different circumstances without
+            concerns about how they shoud be nested in each other - such as call 
+            order, error indication and so on.
+    
+    The OrdererList has been corrected to support PreserveInQueryString (was 
+    forgotten before, sorry ;) and some security precautions were added in it
+    to eliminate any possibility of SQL injection.
+    
+1.A 26-Oct-2009
+    
+    Partial (asynchronous) requests are introduced. 
+    The requests are send through XMLHttpRequest as POST requests
+    Additional parameters to the URL (not in the POST body) specify certain
+    parameters for the processing:
+        ASPCTLPartial=<x>.<y>
+            <x> is the general type of request only form is currently supported.
+                This also defines the encoding used by the client.
+                form - the whole form is submitted url encoded
+            <y> is the expected encoding of the response. Supported values:
+                xml - the return body is an xml document with <update> sections
+            Example: ASPCTLPartial=form.xml
+        ASPCTLControlList=name1,name2,....
+            This supplies the server side names of controls of interest. The value
+            is intended for wider usage than currently employed.
+            In the case of partial request these are the user controls that 
+            need to be explicitly updated. The page may decided, during the 
+            processing, to implicitly update other user controls as well.

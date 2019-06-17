@@ -1,0 +1,25 @@
+{ DIRECTORY:
+    { Access:
+        (int)Scripts=1
+        (int)Read=1
+        (int)Execute=1
+        (int)Browsing=1
+        (int)Cache=1
+        (int)OfflineExecution=1
+        (int)SafeEntrtance=1
+        (int)ContentIsSecure=0
+        (int)ContentIsSafe=0
+        (string)SecurityURL=alp://
+    } Access;
+    { UseExtensions:
+        (string)application/uds-binary-stream=uds-bin
+    } UseExtensions;
+    { Documents:
+        (string)default=Default.asp
+        (string)default=Default.htm
+    } Documents;
+    { CustomErrors:
+    } CustomErrors;
+} DIRECTORY;
+{ Documents:
+} Documents;

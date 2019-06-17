@@ -1,0 +1,14 @@
+{
+	ismultiple: false,
+	subnodes: {
+		capture: {
+			ismultiple: false,
+			view: "capture",
+			select: {
+				data: {
+					hello: "Hello"
+				}
+			}
+		}
+	}
+}

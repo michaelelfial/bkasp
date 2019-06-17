@@ -1,0 +1,19 @@
+<div data-class="NotchShellTopWindows" data-key="viewroot">
+
+	<h4 data-bind-text="{read source=__view path=$caption}"></h4>
+	
+	<div class="c_vmenu" data-class="Repeater" data-bind-$items="{read source=viewroot path=$windows}">
+		<div style="cursor: pointer;" class="c_vmenu_item">
+			<div class="c_vmenu_text" style="width: 80%; float:left; border: 1px dotted #000000;" data-on-click="{bind source=__view path=OnWindow}">
+				&gt;&gt;<h4 data-bind-text="{read path=$caption}"></h4>
+				<em style="color:#808080;" data-bind-elementvisible="{read path=$isminimized}">minimized</em>
+			</div>
+			<div class="c_vmenu_text" style="width: 10%; float:left;border: 1px dashed #000000;" 
+				data-on-click="{bind source=__view path=OnWindowMaxRestore}"
+			>
+				<em style="color:#808080;">R/M</em>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+</div>

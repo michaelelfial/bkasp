@@ -1,0 +1,31 @@
+{
+	ismultiple: false,
+	select: {
+		data: {}
+	},
+	subnodes: {
+		first: {
+			ismultiple: false,
+			view: "formatters",
+			select: {
+				data: {
+					boolval: true,
+					boolval2: false,
+					boolval1: null,
+					dateval1: "2019-02-18T17:36:08Z",
+					dateval1a: "2019-02-18T17:36:08Z",
+					dateval2: "2019-02-18T17:36:08Z",
+					dateval3: "2019-02-18T17:36:08Z",
+					dateval4: "2019-02-18T17:36:08Z",
+					dateval5: "2019-02-18T17:36:08Z",
+					dateval6: "2019-02-18T17:36:08Z",
+					dateval7: "2019-02-18T17:36:08Z",
+					dateval8: "2019-02-18T17:36:08Z",
+					int1: 1234,
+					int2: 0123
+				}
+			}
+		}
+		
+	}
+}

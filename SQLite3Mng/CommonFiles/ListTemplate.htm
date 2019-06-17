@@ -1,0 +1,408 @@
+<html>
+
+<head>
+<meta name="GENERATOR" content="newObjects ALP 1.0">
+<style>
+body { font-family: Arial; font-size: 10pt }
+.bigFont { font-family: Arial; font-size: 16pt }
+td { font-family: Arial; font-size: 10pt }
+H1 { font-family: Arial; font-size: 16pt }
+H2 { font-family: Arial; font-size: 14pt }
+H3 { font-family: Arial; font-size: 12pt }
+</style>
+<title><%CURRENTDIR%></title>
+<SCRIPT>
+// In oredr to keep this page self defined required helper functions are
+// defined here.
+var mitNormal = 1;				// Ordinary menu item
+var mitSeparator = 2;			// Separator
+var mitCheckable = 3;			// Menu item with a 'tick' mark
+var mitRadioGroup = 4;			// Special menu item, holder of a radio group
+var mitGroupMember = 5;			// Member of a radio group
+var _mainMenu = {
+    Items: {
+    	Navigation: {
+    		Name:		"Navigation",
+    		Caption:	"&Navigation",
+    		IsPopup:	true,
+    		Items:	{
+				Root: {
+    				Name:		"SiteRoot",
+    				Caption:	"&Root of the site",
+    				Frame:		null,
+    				Type:		mitNormal,
+    				Handler:	"onCommand",
+    				Info:		"location = \"/\"",
+    				Accel: {
+    					Ctrl:	true,
+    					Alt:	false,
+    					Shift:	false,
+    					Key:	"R"
+    				}
+    			},
+				Sep1: {
+					Name:		"Sep1",
+    				Type:		mitSeparator
+    			},
+				Up: {
+    				Name:		"Up",
+    				Caption:	"&Up",
+    				Frame:		null,
+    				Type:		mitNormal,
+    				Handler:	"onCommand",
+    				Info:		"location = \"../\"",
+    				Accel: {
+    					Ctrl:	true,
+    					Alt:	false,
+    					Shift:	false,
+    					Key:	"U"
+    				}
+    			},
+    			Back: {
+    				Name:		"Back",
+    				Caption:	"&Back",
+    				Frame:		null,
+    				Type:		mitNormal,
+    				Handler:	"onCommand",
+    				Info:		"history.back()",
+    				Accel: {
+    					Ctrl:	true,
+    					Alt:	false,
+    					Shift:	false,
+    					Key:	"B"
+    				}
+    			},
+				Forward: {
+    				Name:		"Forward",
+    				Caption:	"&Forward",
+    				Frame:		null,
+    				Type:		mitNormal,
+    				Handler:	"onCommand",
+    				Info:		"history.forward()",
+    				Accel: {
+    					Ctrl:	true,
+    					Alt:	false,
+    					Shift:	false,
+    					Key:	"F"
+    				}
+    			},
+				Sep31: {
+					Name:		"Sep3",
+    				Type:		mitSeparator
+    			},    			
+				Print: {
+    				Name:		"Print",
+    				Caption:	"&Print this page",
+    				Frame:		null,
+    				Type:		mitNormal,
+    				Handler:	"onPrint",
+    				Info:		"",
+    				Accel: {
+    					Ctrl:	true,
+    					Alt:	false,
+    					Shift:	false,
+    					Key:	"P"
+    				}
+    			},
+				Sep2: {
+					Name:		"Sep2",
+    				Type:		mitSeparator
+    			},
+				Exit: {
+    				Name:		"Exit",
+    				Caption:	"E&xit",
+    				Frame:		null,
+    				Type:		mitNormal,
+    				Handler:	"onExit",
+    				Info:		"",
+    				Accel: {
+    					Ctrl:	false,
+    					Alt:	true,
+    					Shift:	false,
+    					Key:	"X"
+    				}
+    			}
+    		}
+    	}
+	}
+};
+_popupMenu = {
+	Name:	"DefaultPopUp",
+	Items: {
+		Root: {
+    		Name:		"SiteRoot",
+    		ReferTo:	new Array("MainMenu","Navigation","SiteRoot")
+    	},
+		Sep1: {
+			Name:		"Sep1",
+    		Type:		mitSeparator
+    	},
+		Up: {
+    		Name:		"Up",
+    		ReferTo:	new Array("MainMenu","Navigation","Up")
+    	},
+    	Back: {
+    		Name:		"Back",
+    		ReferTo:	new Array("MainMenu","Navigation","Back")
+    	},
+		Forward: {
+    		Name:		"Forward",
+    		ReferTo:	new Array("MainMenu","Navigation","Forward")
+    	},
+		Sep31: {
+			Name:		"Sep3",
+    		Type:		mitSeparator
+    	},    			
+		Print: {
+    		Name:		"Print",
+    		ReferTo:	new Array("MainMenu","Navigation","Print")
+    	},
+		Sep2: {
+			Name:		"Sep2",
+    		Type:		mitSeparator
+    	},
+		Exit: {
+    		Name:		"Exit",
+    		ReferTo:	new Array("MainMenu","Navigation","Exit")
+    	}
+	}
+};
+_popupMenuLink = {
+	Name:	"LinkPopUp",
+	Items: {
+		OpenInNewWnd: {
+    		Name:		"OpenInNewWnd",
+    		Caption:	"Open in a &new window",
+    		Frame:		null,
+    		Type:		mitNormal,
+    		Handler:	"onOpenInNewWnd",
+    		Info:		"",
+    		Accel: {
+    			Ctrl:	true,
+    			Alt:	false,
+    			Shift:	false,
+    			Key:	"N"
+    		}
+    	},
+		Sep32: {
+			Name:		"Sep4",
+    		Type:		mitSeparator
+    	},    			
+		Root: {
+    		Name:		"SiteRoot",
+    		ReferTo:	new Array("MainMenu","Navigation","SiteRoot")
+    	},
+		Sep1: {
+			Name:		"Sep1",
+    		Type:		mitSeparator
+    	},
+		Up: {
+    		Name:		"Up",
+    		ReferTo:	new Array("MainMenu","Navigation","Up")
+    	},
+    	Back: {
+    		Name:		"Back",
+    		ReferTo:	new Array("MainMenu","Navigation","Back")
+    	},
+		Forward: {
+    		Name:		"Forward",
+    		ReferTo:	new Array("MainMenu","Navigation","Forward")
+    	},
+		Sep31: {
+			Name:		"Sep3",
+    		Type:		mitSeparator
+    	},    			
+		Print: {
+    		Name:		"Print",
+    		ReferTo:	new Array("MainMenu","Navigation","Print")
+    	},
+		Sep2: {
+			Name:		"Sep2",
+    		Type:		mitSeparator
+    	},
+		Exit: {
+    		Name:		"Exit",
+    		ReferTo:	new Array("MainMenu","Navigation","Exit")
+    	}
+	}
+};
+function ClearAllMenus() {
+	window.external.MainMenu = null;
+	window.external.Menus.MenuTree.Subs.Clear();
+	window.external.PopupMenuHandlerNamespace = "";
+	window.external.PopupMenuHandler = "";
+	window.external.InitMenuHandlerNamespace = "";
+	window.external.InitMenuHandler = "";
+	window.external.MenuSelectHandlerNamespace = "";
+	window.external.MenuSelectHandler = "";
+}
+function LoadMainMenuFromResource(res) {
+	var menu = ((res == null)?_mainMenu:res);
+	if (typeof(menu) == "object") {
+		var mainMnu = window.external.Menus.MenuTree.CreateSubItem("MainMenu");
+		CreateMenuBranchOn(menu,mainMnu);	
+		return mainMnu;
+	} else {
+		return null;
+	}
+}
+function ShowHideMainMenu(mainMnu) {
+	window.external.MainMenu = mainMnu;
+}
+var popupMenus = null;
+function LoadPopupMenuFromResource(res) {
+	if (res == null) return null;
+	if (popupMenus == null) {
+		popupMenus = window.external.Menus.MenuTree.CreateSubItem("Popups");
+	}
+	var p = popupMenus.CreateSubItem(res.Name);
+	CreateMenuBranchOn(res,p);
+	return p;
+}
+function CreateMenuBranchOn(rsrc,node) {
+	if (typeof(rsrc) != "object" || typeof(node) != "object") return false;
+	if (typeof(rsrc.Items) != "object") return false;
+	var resfrom = rsrc.Items;
+	var el,i;
+	var item,j;
+	for (el in resfrom) {
+		i = resfrom[el];
+		if (typeof(i.ReferTo) == "object") {
+			if (i.ReferTo.length > 0) {
+				item = external.Menus.MenuTree.Subs;
+				for (j = 0; j < i.ReferTo.length; j++) {
+					item = item(i.ReferTo[j]);
+				}
+				node.Subs.Add(i.Name,item);
+			}
+		} else {
+			item = node.CreateSubItem(i.Name);
+			item.Caption = i.Caption;
+			if (i.IsPopup || i.Type == mitRadioGroup) {
+				if (i.Type == mitRadioGroup) item.Type = i.Type;
+				CreateMenuBranchOn(i,item);
+			} else {
+				if (node.Type != mitRadioGroup) {
+					item.Type = i.Type;
+				} else {
+					if (typeof(i.Autocheck) != "undefined") {
+						item.AutoCheck = i.Autocheck;
+					}
+				}
+				item.HandlerNamespace = i.Frame;
+				item.Handler = i.Handler;
+				item.Info = i.Info;
+				if (typeof(i.Accel) == "object") {
+					item.Accelerator.Ctrl = i.Accel.Ctrl;
+					item.Accelerator.Shift = i.Accel.Shift;
+					item.Accelerator.Alt = i.Accel.Alt;
+					item.Accelerator.Key = i.Accel.Key;
+				}
+			}
+		}
+	}
+	return true;
+}
+var mainMenu = null;
+var popUpMenu = null;
+var popUpMenuLnk = null;
+function initPage() {
+	ClearAllMenus();
+	mainMenu = LoadMainMenuFromResource();
+	ShowHideMainMenu(mainMenu);
+	popUpMenu = LoadPopupMenuFromResource(_popupMenu);
+	popUpMenuLnk = LoadPopupMenuFromResource(_popupMenuLink);
+}
+function onCommand(sender) {
+	eval(sender.Info);
+}
+function onPrint(sender) {
+	external.Print();
+}
+function onExit(sender) {
+	window.close();
+}
+var currentElement = null;
+
+function onOpenInNewWnd(sender) {
+	if (currentElement != null) {
+		window.open(currentElement.href);
+	}
+}
+function onContextMenu() {
+	if (event.button == 2) {
+		if (event.srcElement.tagName == "A") {
+			currentElement = event.srcElement;
+			external.DisplayPopupMenu(popUpMenuLnk,event.screenX,event.screenY);
+		} else {
+			external.DisplayPopupMenu(popUpMenu,event.screenX,event.screenY);
+		}
+	}
+}
+</SCRIPT>
+</head>
+
+<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" 
+	onLoad="initPage()"
+	onUnload="ClearAllMenus()"
+	onMouseup="onContextMenu()"
+>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" height="100%">
+  <tr>
+    <td width="100%" class="bigFont"><table border="0" width="100%" cellspacing="0"
+    style="border: 1px solid rgb(0,0,0)">
+      <tr>
+        <td valign="middle" align="center" bgcolor="#000000" class="bigFont"><font color="#FFFF00">A</font><font
+        color="#FF0000">L</font><font color="#FFFFFF">P</font></td>
+        <td width="100%" valign="middle" align="center" bgcolor="#FFFFFF" class="bigFont"><%CURRENTDIR%></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" height="100%"><table border="0" width="100%" height="100%"
+    cellspacing="0" cellpadding="4">
+      <tr>
+        <td width="100%" valign="top" align="left"><table border="0" width="100%">
+          <tr>
+            <td valign="top" nowrap width="10%" bgcolor="#E4C9C9"><strong>Size/Dir</strong></td>
+            <td valign="top" width="20%" nowrap bgcolor="#E4C9C9"><strong>Timestamp</strong></td>
+            <td valign="top" nowrap width="30%" bgcolor="#E4C9C9"><strong>Name</strong></td>
+            <td valign="top" width="40%" bgcolor="#E4C9C9"><strong>Description</strong></td>
+          </tr>
+<%DIRLIST_BEGIN%>
+          <tr>
+            <td valign="top" nowrap width="10%"><%SIZEORDIR%></td>
+            <td valign="top" width="20%" nowrap><%DATE%>&nbsp;<%TIME%></td>
+            <td valign="top" nowrap width="30%"><B><a href="<%PATHNAME%>"><%NAME%></a></B></td>
+            <td valign="top" width="40%"><i><%DESCR%></i></td>
+          </tr>
+<%DIRLIST_END%>
+<%FILELIST_BEGIN%>
+          <tr>
+            <td valign="top" nowrap width="10%"><%SIZEORDIR%></td>
+            <td valign="top" width="20%" nowrap><%DATE%>&nbsp;<%TIME%></td>
+            <td valign="top" nowrap width="30%"><a href="<%PATHNAME%>"><%NAME%></a></td>
+            <td valign="top" width="40%"><i><%DESCR%></i></td>
+          </tr>
+<%FILELIST_END%>
+        </table>
+        </td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" bgcolor="#000080"><table border="0" width="100%" cellspacing="0"
+    cellpadding="0">
+      <tr>
+        <td valign="middle" align="right" width="100%" bgcolor="#000000"
+        style="border-top: 1px solid rgb(0,0,0)"><a href="http://www.newobjects.com"><font color="#FFFFFF">Copyright newObjects 2001</font></a></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

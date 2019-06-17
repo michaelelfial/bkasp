@@ -1,0 +1,16 @@
+body{ font-family: Arial; font-size: 12px; background-color: #F0F0E0; border: 1px inset; }
+td { font-family: Arial; font-size: 12px }
+th { font-family: Arial; font-size: 12px }
+.outset { font-family: Arial; font-size: 12px; border-left: 1px solid rgb(255,255,255); border-right: 1px solid rgb(0,0,128); border-top: 1px solid rgb(255,255,255); border-bottom: 1px solid rgb(0,0,128) }
+.inset { font-family: Arial; font-size: 12px; border-left: 1px solid rgb(0,0,128); border-right: 1px solid rgb(255,255,255); border-top: 1px solid rgb(0,0,128); border-bottom: 1px solid rgb(255,255,255) }
+.insetedit { font-family: Arial; font-size: 12px; border-left: 1px solid rgb(0,0,128); border-right: 1px solid rgb(255,255,255); border-top: 1px solid rgb(0,0,128); border-bottom: 1px solid rgb(255,255,255); background-color: rgb(255,255,224) }
+a:link { color: rgb(0,64,128); text-decoration: none }
+a:visited { color: rgb(0,64,128); text-decoration: none }
+a:hover { background-color: rgb(0,128,128); color: rgb(255,255,255); text-decoration: none }
+.smallFont { font-family: Arial; font-size: 10px }
+.normalFont { font-family: Arial; font-size: 12px }
+blockquote   { text-align: Justify; margin-left: 10px }
+.sample      { color: #000000; background-color: #CCFFCC }
+.wl { color: rgb(255,255,255); font-family: Arial; font-size: 12px }
+.yl { color: rgb(255,255,0); font-family: Arial; font-size: 10px }
+

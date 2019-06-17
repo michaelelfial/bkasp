@@ -1,0 +1,29 @@
+{
+	ismultiple: false,
+	select: {
+		data: {}
+	},
+	subnodes: {
+		first: {
+			ismultiple: false,
+			view: "bkurl1",
+			select: {
+				data: {
+					
+				}
+			}
+		},
+		init: {
+			ismultiple: false,
+			view: "main",
+			select: {
+				data: {
+					cmdline: "innewapp 'CmdsDemoTestApp' main",
+					B: "B",
+					C: "C"
+				}
+			}
+		}
+		
+	}
+}

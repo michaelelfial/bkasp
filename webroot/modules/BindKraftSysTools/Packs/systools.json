@@ -1,0 +1,114 @@
+{
+	ismultiple: false,
+	subnodes:{
+		toolslist: {
+			ismultiple: false,
+			view: "menu",
+			select: {
+				data: { data: [
+						{ caption: "Start page", description: "System tools start screen", open: "start", icon: "tools.svg", accel: "ctrl+shift+00" },
+						{ caption: "Command prompt", description: "Command processor prompt", open: "cmdconsole", icon: "terminal.svg",  accel: "ctrl+0" },
+						{ caption: "Run", description: "Enables you to open views and launch apps direcly. Keeps local history.", open: "cardopener", icon: "run.svg", accel: "ctrl+shift+2"},
+						{ caption: "Node response viewer", description: "Enables you to view the result of a node execution.", open: "nodeviewer", icon: "app.svg", accel: "ctrl+shift+3" },
+						{ caption: "Trace console", description: "View the latest trace messages", open: "traceview", icon: "terminal.svg", accel: "ctrl+shift+4" },
+						{ caption: "Window spy", description: "View opened windows and dig into their data,their views and so on.", open: "winspy", icon: "app.svg", accel: "ctrl+shift+5" },
+						{ caption: "Classes", description: "View all the loaded declared classes and information abot them.", open: "classes", icon: "app.svg", accel: "ctrl+shift+6" },
+						{ caption: "Interfaces", description: "View all the loaded declared interfaces and information abot them.", open: "interfaces", icon: "app.svg", accel: "ctrl+shift+7" },
+						{ caption: "shellfs", description: "View shell fs.", open: "shellfs", icon: "app.svg", accel: "ctrl+shift+8" }
+					]
+				}
+			}
+		},
+		start: {
+			ismultiple: false,
+			view: "start",
+			select: {
+				data: {}
+			}
+		},
+		shellfs: {
+			ismultiple: false,
+			view: "fsbrowserview",
+			select: {
+				data: {}
+			}
+		},
+		cmdconsole: {
+			ismultiple: false,
+			view: "cmdconsole",
+			select: {
+				data: {}
+			}
+		},
+		databrowse: {
+			ismultiple: false,
+			view: "databrowse",
+			select: {
+				data: {}
+			}
+		},
+		cardopener: {
+			ismultiple: false,
+			view: "cardopener",
+			select: {
+				data: {}
+			}
+		},
+		nodeviewer: {
+			ismultiple: false,
+			view: "nodeviewer",
+			select: {
+				data: {}
+			}
+		},
+		classes: {
+			ismultiple: false,
+			view: "classes",
+			select: {
+				data: {}
+			}
+		},
+		class: {
+			ismultiple: false,
+			view: "classinfo",
+			select: {
+				data: {}
+			}
+		},
+		traceview: {
+			ismultiple: false,
+			view: "jbtrace",
+			select: {
+				data: {}
+			}
+		},
+		winspy: {
+			ismultiple: false,
+			view: "windowbrowse",
+			select: {
+				data: {}
+			}
+		},
+		bindingsbrowse: {
+			ismultiple: false,
+			view: "bindingsbrowse",
+			select: {
+				data: {}
+			}
+		},
+		interfaces: {
+			ismultiple: false,
+			view: "interfaces",
+			select: {
+				data: {}
+			}
+		},
+		interface: {
+			ismultiple: false,
+			view: "interface",
+			select: {
+				data: {}
+			}
+		}
+	}	
+}

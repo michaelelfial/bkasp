@@ -1,0 +1,10 @@
+﻿
+//#using "./NotchShellApp.js"
+//#using "./platform/constants.js"
+//#using "./NotchShellMenu.js"
+//#using "./NotchShellTopWindows.js"
+//#using "./NotchView.js"
+//#using "./init.js"
+//#using "./components/NotchShellComponent_Icon.js"
+//#using "./components/NotchShellComponent_ShortcutsDir.js"
+

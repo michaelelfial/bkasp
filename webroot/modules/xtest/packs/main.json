@@ -1,0 +1,36 @@
+{
+	ismultiple: false,
+	select: {
+		data: {}
+	},
+	subnodes: {
+		init: {
+			ismultiple: false,
+			view: "main",
+			select: {
+				data: {
+					cmdline: "innewapp 'CmdsDemoTestApp' main",
+					B: "B",
+					C: "C"
+				}
+			}
+		},
+		list: {
+			ismultiple: true,
+			view: "contents",
+			select: {
+				data: [
+					{id: 0, name: "Ajax", items:[
+						{ name: "Ajax 1", view: "ajax/first" }
+					]},
+					{id: 1, name: "BkUrl", items:[
+						{ name: "BkUrl 1", view: "bkurl/first" }
+					]},
+					{id: 2, name: "Formatters", items:[
+						{ name: "Formatters 1", view: "formatters/first" }
+					]}
+				]
+			}
+		}
+	}
+}

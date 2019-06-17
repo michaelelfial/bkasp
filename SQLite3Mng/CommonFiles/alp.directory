@@ -1,0 +1,29 @@
+; ALP Directory configuration
+{ DIRECTORY:
+    { Access:
+    	; Default configuration grants everything
+        (int)Scripts=1
+        (int)Read=1
+        (int)Execute=1
+        (int)Browsing=1
+        ; Default set to 0 to speed the minimize disk usage
+        ; Registered customers should set it only in the directories where
+        ; it is required
+        (int)Cache=1
+        (int)OfflineExecution=1
+    } Access;
+    { UseExtensions:
+        ; This section is empty in the default configuration (and samples)
+        ; See documentation for details.
+        ; You will need to create entries here if you want to assign
+        ; a file extension to a content type explicitly. The best place to do 
+        ; so is in a local alp.directory but entries in the global file will work too.
+        ; Sample entry:
+        ; (string)text/rtf=rtf
+        (string)application/uds-binary-stream=uds-bin
+    } UseExtensions;
+    { Documents:
+        (string)default=Default.asp
+        (string)default=Default.htm
+    } Documents;
+} DIRECTORY;

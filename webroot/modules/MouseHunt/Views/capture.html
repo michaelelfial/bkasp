@@ -1,0 +1,27 @@
+<div data-class="MouseHunt_MouseTrackerDevGround" data-key="viewroot">
+	<h2>Capture simulation (low level, don't expect visuals</h2>
+	<div data-class="Base" data-context-border="true" data-key="display">
+		What is happening: <span data-bind-text="{read path=$what}"></span><br/>
+		Screen point: <span data-bind-text="{read path=$clientpos.x}"></span>,<span data-bind-text="{read path=$clientpos.y}"></span><br/>
+		Page pos:<span data-bind-text="{read path=$pagepos.x}"></span>,<span data-bind-text="{read path=$pagepos.y}"></span><br/>
+		Key states: 
+			Ctrl: <span data-bind-text="{read path=$keystate.ctrlKey}"></span>,
+			Shift: <span data-bind-text="{read path=$keystate.shiftKey}"></span><br/>
+		Key: 	<span data-bind-text="{read path=$key}"></span><br/>
+
+	</div>
+	<div style="width:200px;height:200px;right:0px;top:0px;position:absolute;" data-class="Base" data-context-border="true" data-key="display2">
+		
+		Rect:<span data-bind-text="{read}"></span><br/>
+
+	</div>
+	
+	<div 
+		style="position:absolute;width:100px;height:100px;left:200px;top:250px;border: 1px dotted blue;background-color:yellow;"
+		data-on-mousedown="{bind source=viewroot path=onTrackStart ref[cont]=self}"
+		data-key="capturearea"
+		>
+		Capture starts here
+	</div>
+
+</div>

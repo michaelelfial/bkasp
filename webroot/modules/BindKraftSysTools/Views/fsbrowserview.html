@@ -1,0 +1,12 @@
+<div data-class="FSBrowserView" data-key="viewroot">
+	<h4 data-bind-text="{read source=__view path=$caption}"></h4>
+	<div data-class="FSBrowser_Directory" style="font-weight:bold;" data-bind-$dir="{read source=__view path=$dir}">
+		<table data-class="Repeater" data-bind-$items="{read source=__control path=$contents}">
+			<tr>
+				<th data-bind-text="{read path=value format=__control:fsitemtype}"></th>
+				<td data-bind-text="{read path=key}"></td>
+				<td> to do</td>
+			</tr>
+		</table>
+	</div>
+</div>

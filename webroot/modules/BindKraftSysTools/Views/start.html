@@ -1,0 +1,59 @@
+<div data-class="TrivialView" data-key="viewroot" class="c_story" 
+	data-on-$datachangedevent="{bind throw=updatecommands}"
+	data-bind-$caption="{read source=static text='System tools'}">
+	<div class="c_header">
+		<img data-class="ImageX modulename='systools'" 
+				data-bind-$src="{read source=static text='$images/tools.svg'}" 
+				alt="" 
+				style="width: 100pt;height:100pt;"
+				class="c_big_icon" />
+		<h2>System tools</h2>
+	</div>
+	<div class="c_body">
+		<h3>About the tools</h3>
+		<p>
+			This is a collection of the most useful system tools in one place. Some of the tools can be opened separately when convenient, hoever in this app they are all arranged
+			in tabs for easy access. To launch the tool you need use the menu on the left.
+		</p>
+		<h3>Tools description</h3>
+		<ul>
+			<li><strong>Command prompt</strong>
+				<p>Arbitrary command processor commands can be registered and there is no requirements for the availability of a certain set. The commands are in the form<br/>
+				cmd [param1 [param2 ...]] [cmd2 [param21 [param22 ....]]]
+				<br/>
+				To see the available commands type help on the command line.
+				</p>
+			</li>
+			<li><strong>Run (Card opener UI)</strong>
+				<p>A tool that is needed during the development to enable you to launch a view by directly typing an URL. The opener keeps history of themost recent URL in
+				the local storage of the browser, so the links are personal (keep that in mind).
+				</p>
+			</li>
+			<li><strong>Trace console</strong>
+				<p>Shows the last trace messages (up to 100) issued through calls to jbTrace.log and jbTrace.logObject methods. These are global for the browser window and
+				are cycled (i.e. if the messages exceed 100 the old ones are removed). The console impacts the system performance drastically and should be used only when needed.
+				Futhermore the log messages are allowed to contain markup and it can break the UI - close or clear the console if you have a problem. Note that some errors are displayed only in
+				the console (such as the raw server responses when error occurs on the server side).
+				</p>
+			</li>
+			<li><strong>Explore windows.</strong>
+				<p>A starting point for a variety of tools for window and view disagnostics. This tool enables you to browse all the open windows in the system and see information about them.
+				The infomration po-ups contain links to several additional tools (if and where appropriate) - data viewer and binding tree explorer. To use these additional tools, browse to the
+				window you need and click on More info, then choose from the links displayed.
+				<br/>
+				This tools can be extremely useful when you need to inspect the state of the data and/or the view and its host window in run time. Debugging the system can be complicated when
+				you need to deal with complex views and it is always better if a simple data/state inspection can help you find the problems without resorting to a debugger.
+				</p>
+			</li>
+			<li><strong>Classes.</strong>
+				<p>Shows a list of all the registered javascript classes in the system. The framework supports some self-documenting features and the available information is displayed in the
+				lists.
+				</p>
+			</li>
+			<li><strong>Protocols (interfaces).</strong>
+				<p>Shows a list of all the registered javascript protocols in the system. 
+				</p>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,6 @@
+<%
+
+Class CHintPanel
+End Class
+
+%>

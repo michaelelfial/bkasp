@@ -1,0 +1,111 @@
+<div data-class="SysWindowMessageTracer" data-key="viewroot">
+	<h4 data-bind-text="{read path=caption}"></h4>
+	
+	<div data-class="DataArea @bindhost={bind source=viewroot} contentaddress='supplyLogMessages' itemscountaddress='supplyLogMessages.length' connectorType='FastProcConnector' #limit='10'" 
+		data-key="da"
+		data-on-$countsetevent="{bind source=./sa path=onDataAreaChange}"
+		data-on-$dataloadedevent="{bind source=./sa path=onDataAreaChange}"
+		data-bind-$startloading="{read source=static number='1'}"
+		style="width:100%; "
+	>
+		<div data-class="ScrollableArea #minvalue='0' #maxvalue='20' #poslimit='20' #smallmove='1' @dataarea={bind source=da}" 
+			data-key="sa"
+			style="overflow:hidden;max-height: 200px;min-height: 200px;"
+		>
+			<div data-class="SelectableRepeater #nofocus='1' identification='key' #retainindex='1' #nowrap='1' selectedCssClass='f_select_item_selected'"
+				data-key="itemslist"
+				data-bind-$items="{read}"
+				data-on-$activatedevent="{bind source=viewroot/msgviewer path=updateTargetsOf}"
+				data-on-$selchangedevent="{bind source=viewroot path=onSelectionChanged}"
+				class="selectable_list1">
+				<div class="cursor_pointer c_bucket_item_height" style="height:20px;white-space: nowrap;text-overflow: ellipsis;overflow:hidden;">
+					<span data-bind-text="{read path=timestamp}" style="display: inline-block; width: 100px;text-overflow: ellipsis;overflow:hidden;"></span>
+					<a data-bind-text="{read path=message.type}"  tabindex="-1" style="display: inline-block; width: 140px;text-overflow: ellipsis;overflow:hidden;" ></a>
+					&nbsp;
+					sourceId:<span data-bind-text="{read path=sourceid}" style="display: inline-block; width: 60px;text-overflow: ellipsis;overflow:hidden;"></span>
+					&nbsp;
+					targetId:<span data-bind-text="{read path=targetid}" style="display: inline-block; width: 60px;text-overflow: ellipsis;overflow:hidden;"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<span data-key="msgviewer" data-class="DataBrowser #detailed='1'" data-bind-$item="{read source=viewroot/itemslist path=$selecteditem.message readdata=$activatedevent}" style="font-weight:bold;">
+	
+		<div data-class="TemplateSwitcher" data-bind-$item="{read source=__control path=$item}" data-key="nodecontent"
+											data-on-$select="{bind source=__control path=TemplateSelector}">
+			<span data-key="null">null</span>
+			<span data-key="undefined">undefined</span>
+			<span data-key="function">function()</span>
+			<span data-key="boolean" data-bind-text="{read}" style="color:blue;"></span>
+			<span data-key="number" data-bind-text="{read}" style="color:red;"></span>
+			<span data-key="string" data-bind-text="{read}" style="color:green;"></span>
+			<span data-key="date" data-bind-text="{read}" style="color:orange;"></span>
+			<span data-key="object"> 
+				<span data-class="DataBrowser #detailed='1'" data-bind-$item="{read}">
+					<span data-class="DualTemplate"
+						 data-key="datanode" 
+						 data-bind-$item="{read source=static object=object}">
+						<a href="#" data-key="default" data-on-click="{bind source=datanode path=ToggleTemplate}">[+] {...}</a> 
+						<span data-key="alternate">
+							<a href="#" data-on-click="{bind source=datanode path=ToggleTemplate}">[-]</a> 
+							{
+								<div data-class="ValueRepeater" data-bind-$items="{read source=__control path=$item}" style="margin-left:16px;" data-async="I100">
+									<span data-bind-text="{read path=$key}"></span><span>:</span>
+									<span data-class="TemplateSwitcher templateSource='nodecontent'" data-bind-$item="{read path=$value}"
+										data-on-$select="{bind source=__control path=TemplateSelector}">
+										<!-- Recurse -->
+									</span>
+									<br/>
+								</div>
+							}
+						</span>
+					</span>
+				</span>
+			</span>
+			<span data-key="BaseObject"> 
+				<span data-class="DataBrowser #detailed='1'" data-bind-$item="{read}">
+					<span data-class="DualTemplate"
+						 data-key="datanode" 
+						 data-bind-$item="{read source=static object=object}">
+						<a href="#" data-key="default" data-on-click="{bind source=datanode path=ToggleTemplate}">[+] {...} 
+							<span data-bind-text="{read source=__control path=$item customformat=__control:FormatBaseObjectBriefInfo}"></span> </a> 
+						<span data-key="alternate">
+							<a href="#" data-on-click="{bind source=datanode path=ToggleTemplate}">[-] <span data-bind-text="{read source=__control path=$item customformat=__control:FormatBaseObjectBriefInfo}"></span></a> 
+							{
+								<div data-class="ValueRepeater" data-bind-$items="{read source=__control path=$item}" style="margin-left:16px;" data-async="I100">
+									<span data-bind-text="{read path=$key}"></span><span>:</span>
+									<span data-class="TemplateSwitcher templateSource='nodecontent'" data-bind-$item="{read path=$value}"
+										data-on-$select="{bind source=__control path=TemplateSelector}">
+										<!-- Recurse -->
+									</span>
+									<br/>
+								</div>
+							}
+						</span>
+					</span>
+				</span>
+			</span>
+			<span data-key="array"> 
+				<span data-class="DataBrowser #detailed='1'" data-bind-$item="{read}">
+					<span data-class="DualTemplate"
+						 data-key="datanode" 
+						 data-bind-$item="{read source=static object=object}">
+						<a href="#" data-key="default" data-on-click="{bind source=datanode path=ToggleTemplate}">[+] [...]</a> 
+						<span data-key="alternate">
+							<a href="#" data-on-click="{bind source=datanode path=ToggleTemplate}">[-]</a> 
+							[
+								<div data-class="Repeater" data-bind-$items="{read source=__control path=$item}" style="margin-left:16px;">
+									<div data-class="TemplateSwitcher templateSource='nodecontent'" data-bind-$item="{read}"
+										data-on-$select="{bind source=__control path=TemplateSelector}" data-async="I100">
+										<!-- Recurse -->
+									</div>
+								</div>
+							]
+						</span>
+					</span>
+				</span>
+			</span>
+		</div>
+	</span>
+</div>

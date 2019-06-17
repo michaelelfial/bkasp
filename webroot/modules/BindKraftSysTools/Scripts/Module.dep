@@ -1,0 +1,22 @@
+﻿
+//#using "./SysToolsApp.js"
+//#using "./platform/constants.js"
+//#using "./CommandConsole.js"
+//#using "./CardOpener.js"
+//#using "./SysToolsClassesInfoView.js"
+//#using "./SysToolsInterfaceInfo.js"
+//#using "./SysToolsInterfaceInfoView.js"
+//#using "./SysToolsInterfacesInfoView.js"
+//#using "./WindowBrowser.js"
+//#using "./SysToolsBindingsBrowser.js"
+//#using "./SysToolsBindingsViewer.js"
+//#using "./SysToolsSingleClassInfo.js"
+//#using "./SysToolsSingleClassInfoView.js"
+//#using "./SysToolsPackageViewer.js"
+//#using "./SysToolsAppIndicator.js"
+//#using "./init.js"
+
+
+/* Module */
+
+//#using "./misc/FSBrowserView.js"

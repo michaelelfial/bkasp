@@ -1,0 +1,350 @@
+<div data-class="SysToolsSingleClassInfoView" data-key="viewroot"
+	data-on-$settingschangedevent="{bind source=self path=updateTargets}"
+>
+    <table class="docs_reftable">
+        <tr>
+            <th>name:</th>
+            <td data-bind-text="{read path=info.$name}"></td>
+        </tr>
+        <tr>
+            <th>kind:</th>
+            <td>class</td>
+        </tr>
+        <tr>
+            <th>base class:</th>
+            <td data-bind-text="{read path=info.$baseclass}"></td>
+        </tr>
+        <tr>
+            <th>parents (brief):</th>
+            <td data-bind-text="{read path=info.$fullchain}"></td>
+        </tr>
+        <tr>
+            <th>inheritance hierarchy:</th>
+            <td>
+                <div data-class="Repeater storeIndexIn='idx'" data-bind-$items="{read path=info.$parents}">
+                    <blockquote data-bind-text="{read path=name}" class="docs_link" 
+                        data-bind-indentination="{read path=idx customformat=viewroot:fmtIndentination}" 
+                        data-on-click="{bind source=viewroot path=onShowClass}">
+                    </blockquote>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>Supported protocols:</th>
+            <td >
+				<div style="white-space:normal;height: 120px;overflow-y:auto;" data-class="Repeater storeIndexIn='idx'" data-bind-$items="{read path=info.$protocols}">
+                    <div data-bind-text="{read path=name}" class="docs_link" style="margin-right: 10px;" 
+                        data-on-click="{bind source=viewroot path=onShowProt}">
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+	
+	<input type="checkbox" data-class="CheckBox" 
+		data-bind-$checked="{bind path=info.$inherited writedata=$uncheckedevent,$checkedevent}"
+	/> Show inherited |
+	<input type="checkbox" data-class="CheckBox" 
+		data-bind-$checked="{bind path=info.$showprivate writedata=$uncheckedevent,$checkedevent}"
+	/> Show private |
+	<input type="checkbox" data-class="CheckBox" 
+		data-bind-$checked="{bind path=info.$showhidden writedata=$uncheckedevent,$checkedevent}"
+	/> Show hidden |
+	Filter: <input data-class="TrivialElement #detectenter='1'" type="text" data-bind-val="{bind path=info.$filter writedata=change,$enterevent}"/>
+	
+	<div style="display:none" 
+		data-class="TemplateSource"
+		data-key="detailtemplates"
+		data-bind-$keyset="{read source=static text='desc,remarks,proto,args,returns,flags,notes,problem,events' format=StringToArrayFormatter}"
+		data-bind-$keyset[field]="{read source=static text='desc,remarks,flags,notes,problem' format=StringToArrayFormatter}"
+		data-bind-$keyset[event]="{read source=static text='desc,remarks,flags,notes,problem,args' format=StringToArrayFormatter}"
+		>
+		<span data-key="desc" data-bind-text="{read path=desc}"></span>
+		
+		<div data-key="remarks" data-bind-elementvisible="{read path=remarks format=NotNullBooleanFormatter}">
+			<strong>Remarks:</strong>
+			<em data-bind-text="{read path=remarks}"></em>
+		</div>
+		<div data-key="proto" data-bind-elementvisible="{read path=proto format=NotNullBooleanFormatter}">
+			<strong>Declaration:</strong>
+			<span data-bind-text="{read path=proto}"></span>
+		</div>
+		<div data-key="args" 
+			data-class="Repeater" 
+			data-bind-$items="{read path=params}">
+			<div>
+				<em data-bind-text="{read path=name}"></em> - <span data-bind-text="{read path=description}"></span>
+			</div>
+		</div>
+		<div data-key="returns" data-bind-elementvisible="{read path=returns format=NotNullBooleanFormatter}">
+			<strong>returns:</strong>
+			<em data-bind-text="{read path=returns}"></em>
+		</div>
+		<div data-key="events" data-bind-elementvisible="{read path=events format=NotNullBooleanFormatter}">
+			<strong>events:</strong>
+			<em data-bind-text="{read path=events}"></em>
+		</div>
+		<div data-key="notes" data-bind-elementvisible="{read path=notes format=NotNullBooleanFormatter}">
+			<strong>Notes:</strong>
+			<em data-bind-text="{read path=notes}"></em>
+		</div>
+		<span data-key="flags">
+			<span data-bind-elementvisible="{read path=issealed}"> sealed </span>
+			<span data-bind-elementvisible="{read path=isvirtual}"> intended for override </span>
+			<span data-bind-elementvisible="{read path=isdeprecated}" style="color:#EE0000;"> deprecated </span>
+		</span>
+		<div data-key="problem" style="color: #FF0000;" data-bind-elementvisible="{read path=problem format=NotNullBooleanFormatter}">
+			<strong>Problems:</strong>
+			<em data-bind-text="{read path=problem}"></em>
+		</div>
+	</div>
+	
+	<div data-class="Expander initialState='expanded'" class="f_expander">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Constructor</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Constructor</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>private</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Base" data-bind-$data="{read source=parentcontext path=info.$constructor}" data-context-border="true">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td>
+					<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template}" ></div>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+	
+    <div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$fields.length options=asyncread}">
+        <h4 data-key="InactiveHeader" class="f_expander_inactive">Fields</h4>
+        <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Fields</h4>
+        <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+            <thead>
+                <tr>
+					<th>&nbsp;</th>
+                    <th>name</th>
+                    <th>private</th>
+                    <th>default</th>
+                    <th>parameter</th>
+                    <th>description</th>
+                </tr>
+            </thead>
+            <tbody data-class="Repeater" data-bind-$items="{read path=info.$fields options=asyncread}" data-async="B25I20">
+                <tr>
+					<td style="width:10pt;"><div style="width:100%;height:100%;background-color:#4488DD;" data-bind-elementvisible="{read path=isinherited format=InverseFormatter}">&nbsp;</div></td>
+                    <td data-bind-text="{read path=name}"></td>
+                    <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                    <td data-bind-text="{read path=defaultValue}"></td>
+                    <td data-bind-text="{read path=param}"></td>
+                    <td style="white-space:normal;">
+						<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template.#field}" ></div>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$properties.length options=asyncread}">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Properties (pseudo properties)</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Properties (pseudo properties)</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+            <thead>
+                <tr>
+					<th>&nbsp;</th>
+                    <th>name</th>
+                    <th>private</th>
+                    <th>kind</th>
+                    <th>description</th>
+                </tr>
+            </thead>
+            <tbody data-class="Repeater" data-bind-$items="{read path=info.$properties options=asyncread}" data-async="B25I20">
+                <tr>
+					<td style="width:10pt;"><div style="width:100%;height:100%;background-color:#4488DD;" data-bind-elementvisible="{read path=isinherited format=InverseFormatter}">&nbsp;</div></td>
+                    <td data-bind-text="{read path=name}"></td>
+                    <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                    <td data-bind-text="{read path=kind}"></td>
+                    <td>
+						<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template}" ></div>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$methods.length options=asyncread}">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Methods</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Method</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+				<th>&nbsp;</th>
+                <th>name</th>
+                <th>private</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.$methods options=asyncread}" data-async="B25I20">
+            <tr>
+				<td style="width:10pt;"><div style="width:100%;height:100%;background-color:#4488DD;" data-bind-elementvisible="{read path=isinherited format=InverseFormatter}">&nbsp;</div></td>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td>
+					<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template}" ></div>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$events.length options=asyncread}">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Events</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Events</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+				<th>&nbsp;</th>
+                <th>name</th>
+                <th>default</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.$events options=asyncread}" data-async="B25I20">
+            <tr>
+				<td style="width:10pt;"><div style="width:100%;height:100%;background-color:#4488DD;" data-bind-elementvisible="{read path=isinherited format=InverseFormatter}">&nbsp;</div></td>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=type}"></td>
+                <td style="white-space:normal;">
+					<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template.#event}" ></div>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+	
+	<div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$triggers.length options=asyncread}">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Triggers</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Triggers</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+				<th>&nbsp;</th>
+                <th>name</th>
+                <th>default</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.$triggers options=asyncread}" data-async="B25I20">
+            <tr>
+				<td style="width:10pt;"><div style="width:100%;height:100%;background-color:#4488DD;" data-bind-elementvisible="{read path=isinherited format=InverseFormatter}">&nbsp;</div></td>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=type}"></td>
+                <td style="white-space:normal;">
+					<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template}" ></div>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+	
+	<div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$delegates.length options=asyncread}">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Delegates</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Delegates</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+				<th>&nbsp;</th>
+                <th>name</th>
+                <th>default</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.$delegates options=asyncread}" data-async="B25I20">
+            <tr>
+				<td style="width:10pt;"><div style="width:100%;height:100%;background-color:#4488DD;" data-bind-elementvisible="{read path=isinherited format=InverseFormatter}">&nbsp;</div></td>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=type}"></td>
+                <td style="white-space:normal;">
+					<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template}" ></div>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$staticfields.length options=asyncread}">
+        <h4 data-key="InactiveHeader" class="f_expander_inactive">Static fields</h4>
+        <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Static fields</h4>
+        <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>private</th>
+                    <th>default</th>
+                    <th>parameter</th>
+                    <th>description</th>
+                </tr>
+            </thead>
+            <tbody data-class="Repeater" data-bind-$items="{read path=info.$staticfields options=asyncread}" data-async="B25I20">
+                <tr>
+                    <td data-bind-text="{read path=name}"></td>
+                    <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                    <td data-bind-text="{read path=defaultValue}"></td>
+                    <td data-bind-text="{read path=param}"></td>
+                    <td style="white-space:normal;">
+						<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template.#field}" ></div>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$staticproperties.length options=asyncread}">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Static properties (pseudo properties)</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Static properties (pseudo properties)</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>private</th>
+                    <th>kind</th>
+                    <th>description</th>
+            </thead>
+            <tbody data-class="Repeater" data-bind-$items="{read path=info.$staticproperties options=asyncread}" data-async="B25I20">
+                <tr>
+                    <td data-bind-text="{read path=name}"></td>
+                    <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                    <td data-bind-text="{read path=kind}"></td>
+                    <td style="white-space: normal;">
+						<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template}" ></div>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div data-class="Expander initialState='expanded'" class="f_expander" data-bind-elementvisible="{read path=info.$staticmethods.length options=asyncread}">
+    <h4 data-key="InactiveHeader" class="f_expander_inactive">Static Methods</h4>
+    <h4 data-key="ActiveHeader" class="f_expander_active" style="text-decoration: underline;">Static Methods</h4>
+    <table style="width: 100%" class="docs_reftable f_expander_body" data-key="Body">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>private</th>
+                <th>description</th>
+            </tr>
+        </thead>
+        <tbody data-class="Repeater" data-bind-$items="{read path=info.$staticmethods options=asyncread}" data-async="B25I20">
+            <tr>
+                <td data-bind-text="{read path=name}"></td>
+                <td data-bind-text="{read path=priv format=VisualBooleanFormatter}"></td>
+                <td>
+					<div data-class="TemplateSwitcher" data-bind-$item="{read(1)}" data-bind-$template="{read(0) source=__view/detailtemplates path=$template}" ></div>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>

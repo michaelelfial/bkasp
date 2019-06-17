@@ -1,0 +1,45 @@
+<div data-class="SysToolsPackageViewer" style="padding: 20px;" class="c_card_opener">
+	<table class="f_full_width">
+        <thead>
+            <tr>
+                <td style="min-width:630px; width:630px; max-width:650px;">
+                    <span class="c_card_opener_head_span">Enter package location: </span>
+					<p><strong>Example url: </strong><span>/Node/main@systools/start</span></p>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="c_card_opener_link_td">
+					<input type="text" data-bind-val="{bind source=__view path=$packageUrl}" class="c_card_opener_input" />
+					<input type="button" value="Execute package" data-on-click="{bind source=__view path=onExecutePackage ref[r]=__view/result@}" class="client_tools_buttons" />	
+                </td>       
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <hr />
+    <table data-class="Repeater storeIndexIn='idx'" data-bind-$items="{read source=__view path=history}" class="f_full_width">
+		<tr class="c_card_opener_main_his" data-key="url_container">
+			<td style="width: 30px; height: 30px;">
+				<img data-class="ImageX" alt="Delete"
+					 style="padding-left: 10px; cursor: pointer;"
+					 data-bind-$src="{read source=static text='/img/delete__icon.png'}"
+					 data-on-click="{bind source=__view path=DeleteCurrent parameter='idx'}"
+				/>
+			</td>
+			<td style="width: auto;">
+				<span data-key="card_link" style="padding-left: 10px; padding-right: 10px; cursor: pointer; overflow: visible; white-space: nowrap" data-bind-text="{read}" data-on-click="{bind source=__view path=HistoryOpen}"></span>
+			</td>
+		</tr>
+    </table>
+    <hr />
+    <input type="button" class="client_tools_buttons" value="Clear History" data-on-click="{bind source=__view path=OnClearHistoryClick}" />
+	<br />
+	<hr />
+	<br />
+	<div style="border: 2px dotted #ccc; display: inline-block; padding: 5px; background-color: #F2F2F2">
+		<strong style="vertical-align: top;">Response from server: </strong>
+		<div style="display: inline-block;" data-class="DataViewerControl !expanded='false'" data-bind-$data="{read source=__view path=$result}"></div>
+	</div>
+</div>

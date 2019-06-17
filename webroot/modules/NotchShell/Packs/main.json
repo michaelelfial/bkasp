@@ -1,0 +1,28 @@
+{
+	ismultiple: false,
+	subnodes:{
+		menu: {
+			ismultiple: false,
+			view: "menu",
+			select: {
+				data: {}
+			}
+		},
+		topwindows: {
+			ismultiple: false,
+			view: "topwindows",
+			select: {
+				data: {}
+			}
+		},
+		notch: {
+			ismultiple: false,
+			view: "notch",
+			select: {
+				data: {}
+			}
+		}
+		
+		
+	}	
+}

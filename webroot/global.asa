@@ -1,0 +1,114 @@
+<!-- 
+    Skeleton Global.asa for ASP-CTL 
+    
+    The supported settings are listed in comments, you can uncomment what you need and change the value(s) appropriately.
+    See the comments about each setting and the documentation for more detailed information.
+    
+    Basically most settings can be specified on application or session level where the session level overrides the application
+    setting(s). However, static session specific settings are of little use and usually some code should be involved in the process.
+    Furthermore the settings for the current session can be changed at run time from a regular ASP-CTL page which is most often what
+    you would want if session specific settings are needed. Thus typically only the application settings are set in the global.asa's
+    Application_OnStart
+-->
+    
+<script runat="server" language="vbscript" ID="MainScript">
+    Sub Application_OnStart
+		' BindKraft settings
+		' Modules directory relative to the app root
+		Application("modules") = "/modules/" 
+	
+		' ASPCTL Settings (many do nothing in this setup)
+        ' Initialize location
+        ' ~~~~~~~~~~~~~~~~~~~
+        ' If the application is not hosted as entire virtual WEB site you need to specify the name of the
+        ' subdirectory where it resides. You will need to adjust the include directives in all the ASP files!
+        ' To avoid that when you plan to host in various scenarios use the RELATIVE TEMPLATE instead.
+        Application("ASPCTLBasePath") = "/bkasp/"
+        '
+        ' Application("ResourceDatabase") = "/mydbdir/aspctl.sqlite3"
+        ' In case you want to place the resource database somewhere else set the path here. For instance
+        ' you may want to place it in the same directory where your application database(s) reside so that
+        ' the access level can be managed in bulk.
+    
+        ' Initialize defaults
+        
+        ' Encryption
+        ' ~~~~~~~~~~
+        Application("PageCryptLevel") = 0 ' Default level
+        Application("PageEncryptMethod") = "DES" ' | "AES"
+        Application("PageCryptKey") = "82335782FE42AC56" ' Set/generate one if the entire application should use the same key
+        '   NOTE: An application level key (one key for the entire application) can be useful if you want to make it possible the users to
+        '       submit forms after the sessions expiration without need to reenter the application. With dynamically (default) generated keys
+        '       a form generated in one session cannot be read correctly in a new session (if it contains any encrypted elements - such as 
+        '       post variables button values and so on). The new session would have a new key and the old form wont decrypt.
+        '       Of course, this is not only a matter of cryptography keys, the application needs to be designed to work that way - 
+        '       auto logon the users (from cookies for instance), the pages involved must not depend on session data that may not be
+        '       available in a fresh session and so on. And, in the end, keeping the same key for a long time can potentially be exploited.
+        '       So, go that way only in those scenarios in which this is crucial.
+        ' Application("RedirectNewSessions") = "/" ' Virtual path relative to the application's root directory (not the site root!) to which to redirect
+        '   when new session starts with a POST request. This should be enabled when dynamic encryption keys are used (when the above setings are commented/removed).
+        '   In such a scenarion when new session starts the framework will not be able to decrypt some of the post values because they were encrypted with
+        '   the keys of the old session and error will occur. The redirection is invoked at the moment at which a new key generation occurs.
+        
+        ' Language
+        ' ~~~~~~~~
+		
+        Application("DefaultFallBackLanguage") = "en"
+        ' The language to use if the browser requests language we do not support. If not defined "en" is used
+        ' Application("RecordTexts") = True
+        ' When set to true this instructs the framework to record all the texts for translation in the resource database
+        ' WARNING!!! This requires write access to the resource database which is often disabled in production environments.
+        
+        ' Misc.
+        ' ~~~~~
+        Application("EnableSubmitShield") = True ' Enable the simple multiple submit shield for the entire application
+           Application("EnableFullSubmitShield") = True ' If the submit shield is enabled this causes full protection
+        '       Application("HideSubmitShieldMessage") = True  ' No message is shown when the full submit shield prevents the form from submitting
+        Application("EnableSavePosition") = True ' Enable save/restore the screen position after form submit
+        Application("EnableClientValidation") = True      ' Enables client side dynamic indication where supported by the validators
+        Application("AggressiveClientValidation") = True  ' If EnableClientValidation is true instructs the validators to register for more aggressive client side events (such as validation on key typed)
+        Application("UsePostVarsForButtonValues") = True  ' Enables usage of post collections by WEB controls using the form field's name to store values
+        Application("AsyncRequestsEnabled") = True ' Enable asynchronous partial submissions
+        ' Application("AsyncRequestsDebug") = True ' Enable asynchronous partial submissions
+        ' This one is used by optional routines loading/saving user specific session data
+        ' Application("SessionUserIdName") = "USER_ID" ' The name of the session variable containing usable unique user id
+        
+        ' Page Call Stack
+        ' ~~~~~~~~~~~~~~~
+        Application("ASPCTL_MaxStacks") = 2 ' This is the default setting if this is not present. The max number of the page call stacks per session
+        ' Application("ASPCTL_StackExpiredPage") = Application("ASPCTLBasePath") ' Where to redirect on expired/missing page call stacks
+        
+        Application("ASPCTLFixedCodePage") = 65001
+    End Sub
+    Sub Session_OnStart
+        ' NOTE! It is not usually useful to specify static configuration settings on session level. Consider the list mostly as hints
+        ' about the available settings. If you want session level specific settings it is recommended to set/change these in the regular
+        ' ASP pages in response to user requests. Sometimes it may be feasible to restore saved user settings in the global.asa. If
+        ' that is the case you will need to write code that extracts them. This is usually difficult and sometimes even impossible depending
+        ' on the user management techniques involved. In other words when the session starts you rarely know enough in order to identify the
+        ' user and his/her settings. This is much easier to implement in the regular ASP pages and is recommended.
+        '
+        ' Encryption
+        ' ~~~~~~~~~~
+        ' Session("PageCryptLevel") = 0 ' Default level
+        ' Session("PageEncryptMethod") = "DES" | "AES"
+        ' Session("PageCryptKey") = "0123456701234567" ' Set/generate one if the entire application should use the same key
+        
+        ' Language
+        ' ~~~~~~~~
+        ' Session("PageUILanguage") = "en" | "bg" ...
+        ' This is useful if you want to fix the default language for the application. If this is set here the language autotdetection
+        ' will be truned off!
+        
+        ' Misc.
+        ' ~~~~~
+        ' Session("EnableSubmitShield") = True ' Enable the simple multiple submit shield for the entire application
+        ' Session("EnableSavePosition") = True ' Enable save/restore the screen position after form submit
+        
+        ' Page Call Stack
+        ' ~~~~~~~~~~~~~~~
+        ' Session("ASPCTL_StackExpiredPage") = Application("ASPCTLBasePath") ' Where to redirect on expired/missing page call stacks
+    End Sub
+    
+
+</script>

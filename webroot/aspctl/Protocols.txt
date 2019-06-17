@@ -1,0 +1,114 @@
+This file describes in short some of the protocols used in the ASP-CTL framework.
+
+A PROTOCOL in the terms of ASP-CTL is the equivalent of the term interface as used
+in many programming languages. The VBScript classes can optionally implement a 
+
+    Public Property Get Protocols
+        Protocols = "Protcol1,Protocol2,Protocol3"
+    End Property
+
+The property must return a comma separated list of the protocols supported. The
+implementation is not mandatory, but is desired for classes that need to 
+integrate into certain infrastructures.
+
+The global ASP-CTL function:
+ImplementsProtocol(obj, protName)
+
+returns true if the object passed as "obj" parameter supports the protocol named
+protName. If the class does not have the Protocols property implemented the function
+returns False and not an error.
+
+A protocol implementation reported by a class bounds it to implement the members
+required by the protocol. Because VBScript does not have means to enforce this, nor
+a syntax for protocol definition the protocols should be described as partial class 
+definitions with comments detailing their functionality. Because of the flexible nature 
+of VBScript it is possible to make some members of a protocol non-mandatory. If that is
+the case this should be clearly noted in the documentation, the lack of such a not should
+be treated as meaning "the member is mandatory".
+
+In the documentation the word Contructor has a special menaning. It means that the class
+must be complemented with a global function named Class_<the class name> that creates and
+initializes an instance of that class.
+
+This file lists the standard ASP-CTL defined protocols. Application and library
+specific protocols should be documented in the corresponding documentation.
+
+PControl - defines the basic public functionality of WEB and User control
+    In most cases there is no need to declare (report) it because the controls are usually
+    known to be such from the context. However it is highly recommended to report it from
+    WEB conrols.
+
+    Protocol PControl
+        Public Name ' As String
+        Public CssClass ' As String - CSS Class names
+        Public Style ' As String - CSS explicit style settings
+        Public ClientId ' As String - Client Id assigned during the creation
+        Public SkinId ' As String - Assigned SkinId
+        Public Value ' Variant (most framework features need only the Get property, however Put property is strongly recommended)
+        Public Property Get Attributes ' As VarDictionary Collection
+        Public PreserveInQueryString
+        Public Property Get HttpGetParams
+        Public Sub Render
+    End Protocol
+    
+PUserControl - Defines the user control specific functions. Like PControl this protocol does not need to
+    be reported, because the user controls are known to be such. Reporting the protocol may be required
+    if the control's class is accessed by code dealing with different kinds of classes, some of which may
+    be user controls. As of now there is no such coed in ASP-CTL framework, but some 3-d pary additions
+    my be needing this.
+
+    Protocol PUserControl requires PControl
+        Public ProcessPage
+    End Protocol
+
+PAdvancedUserControl - Declares a member that replaces the Class_Initialize and is called from an external constructor
+    
+    Protocol PAdvancedUserControl requires PUSerControl
+        Public Sub Init
+        Constructor(ctlName As String)
+    End Protocol
+
+PPartialRender - Can be implemented by user controls that support asynchronous partial post backs.
+    The Partial render method should perform the actual rendering of the inner content of the
+    control, while the Render method should call this method and put its output inside a valid
+    html element (most often a DIV or a SPAN).
+
+    Protocol PPartialRender
+        Public Sub RenderPartial
+    End Protocol
+    
+PPartialRenderAddOn - Allows an user conrol to render custom partial render commands in the output.
+    
+    Protocol PPartialRenderAddOn requires PPartialRender
+        Public Sub RenderPartialAddOn
+    End Protocol
+        
+PCallback - Allows methods to be called on the object by name with a single parameter. If more parameters are needed a collection is to be used
+
+    Protocol PCallback
+        Public Function Callback(method, argument)
+        ' method - the name of the method
+        ' argument - the parameter(s)
+    End Protocol
+
+PCustomRenderCallback - Allows controls supporting custom render to call their hosts to handle part or the entire rendering process (depending on the support by
+                    the hosted control)
+                    
+    Protocol PCustomRenderCallback
+        Public Function CustomRenderCallback(cmd, hostedCtl, Item, param)
+        ' cmd - render command. If there are multiple possibilities the hosted control can supply a command name/id so that the
+        '       host would know what is requested. Pass Empty if there is no command support. In future extensions if commands are introduced Empty becomes a default 
+        '       command for backward compatibility
+        ' hostedCtl - ref to the hosted control
+        ' Item - depending on the hosted control (The ClassType should be used to determine this) may supply an instance of a subitem to render
+        ' param - custom parameter if supported (and needed) by the hosted control (again ClassType should inform the host what to expect).
+        ' Returns: False if the rendering is not handled, True otherwise. This allows the control to use default rules if False is returned. However
+        '   honouring this option is not mandatory and each control that supports custom render may or may not offer default rendering for elements or everything
+        '   depending on the implementation and viability of such a feature.
+    End Protocol
+    
+    This simple interface assumes that the host knows how the hosted control works and thus by checking the class type and possibly comparing the instance name (.Name)
+    it can understand what it is called for. The command allows for more complex scenarios where the hosted control may support different ways of custom callback
+    rendering. For now it is mostly reserved (pass Empty) but the host should check to see if that is the case and do nothing if the command is not IsEmpty(cmd).
+    
+    

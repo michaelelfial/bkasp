@@ -1,0 +1,209 @@
+<div data-class="Formatters_Test1_View">
+
+<span data-bind-elementvisible="{read source=__view path=$isDirty readdata=$viewdirtystatechanged}" style="color: red; font-weight: bold;">Dirty!</span>	
+
+	<table>
+		<caption>Dates and times</caption>
+		<thead style="background-color: #E0E0E0">
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+				<td style="width:400px">
+					Formatted
+				</td>
+				<td>
+					Unformatted
+				</td>
+			</tr>
+		</thead>
+		<tr>
+			<td>
+				default (N)
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval1 format=ConvertDateTime,FormatDateTime checkstate=input}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval1}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				default (N bg)
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval1a format=ConvertDateTime,FormatDateTime(F [bg])}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval1a}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				custom dd/MM[yyyy]
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval2 format=ConvertDateTime,FormatDateTime('dd/MM[yyyy]')}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval2}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Long time [T]
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval3 format=ConvertDateTime,FormatDateTime(T)}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval3}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Shorter date-time numbers only [n]
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval4 format=ConvertDateTime,FormatDateTime(n)}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval4}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Read-only longest (from the first row) [W]
+			</td>
+			<td>
+				<input type="text" style="width:100%" readonly="true" data-bind-val="{read path=dateval1 format=ConvertDateTime,FormatDateTime(W)}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval1}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ShortDateTime alias[n]
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval5 format=ConvertDateTime,FormatShortDateTime}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval5}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				LongDateTime alias[W] reads from previous
+			</td>
+			<td>
+				<input type="text" style="width:100%" readonly="true" data-bind-val="{read path=dateval5 format=ConvertDateTime,FormatLongDateTime}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval5}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				DefaultDateTimeFormat
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval6 format=DefaultDateTimeFormat}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval6}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				DefaultDateFormat
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval7 format=DefaultDateFormat}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval7}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				DefaultTimeFormat
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=dateval8 format=DefaultTimeFormat}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=dateval8}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Reversed ISO
+			</td>
+			<td>
+				<input type="text" style="width:100%" readonly="true" data-bind-val="{read source=__view path=$demodate inverseformat=ConvertDateTime(ISO)}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read source=__view path=$demodate format=FormatLongDateTime}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Reversed MS
+			</td>
+			<td>
+				<input type="text" style="width:100%" readonly="true" data-bind-val="{read source=__view path=$demodate inverseformat=ConvertDateTime(MS)}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read source=__view path=$demodate format=FormatLongDateTime}"></span>
+			</td>
+		</tr>
+	</table>
+	
+	<hr/>
+	
+	<!--
+	<table>
+		<caption>Integers</caption>
+		<thead style="background-color: #E0E0E0">
+			<tr>
+				<td>
+					&nbsp;
+				</td>
+				<td style="width:400px">
+					Formatted
+				</td>
+				<td>
+					Unformatted
+				</td>
+			</tr>
+		</thead>
+		<tr>
+			<td>
+				FormatInteger
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=int1 format=FormatInteger}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=int1}"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				FormatInteger
+			</td>
+			<td>
+				<input type="text" style="width:100%" data-bind-val="{bind path=int1 format=FormatInteger([bg])}"/>
+			</td>
+			<td>
+				<span data-bind-text="{read path=int2}"></span>
+			</td>
+		</tr>
+	</table>
+	-->
+	<div data-class="VirtualDropDownControl keyproperty='id' descproperty='name'" data-bind-$items="{read source=__view path=$lookup.items}"></div>
+	<input type="button" value="Recycle (after editing)" data-on-click="{bind source=__view path=onRecycle}" />
+</div>

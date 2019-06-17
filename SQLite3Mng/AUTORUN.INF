@@ -1,0 +1,4 @@
+[autorun]
+open=.\ALPFrame.exe
+icon=.\ALPFrame.exe,1
+label=ALP Portable Application

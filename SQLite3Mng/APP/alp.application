@@ -1,0 +1,332 @@
+{ APPLICATION:
+    { ExecutionMap:
+        { asp: (CG.newObjects.ScriptGen)
+            (int)Timeout=60
+            (int)RequireAsynch=2
+            (int)CheckThatFileExists=1
+            (int)IsScriptEngine=1
+            (int)IISCompatible=3
+            (string)ScriptLanguage=ASP
+            (string)DefaultLanguage=VBScript
+            (int)ViewSource=2
+            (int)EnableParentPaths=1
+            { COMMAP:
+                (string)newObjects.utilctls.COMApartment={242D4FF6-766A-4208-BC0B-105F5D1176C0}
+                (string)newObjects.utilctls.COMThread={238DF0CC-1982-4D2A-9773-22795F358304}
+                (string)newObjects.utilctls.COMScriptThread={8D79C106-4807-4E49-9515-FA7DB84C7BC7}
+                (string)newObjects.utilctls.ConfigFile={262DE78D-982E-4B0F-8230-D99D079EA7FA}
+                (string)newObjects.utilctls.CustomLock={EFC453AE-071E-40DF-A679-A8867C3C6088}
+                (string)newObjects.utilctls.IniFile={BAA1BD2B-3077-11D3-959F-0040332BA2EA}
+                (string)newObjects.utilctls.Pack1Creator={06C9B1B5-13E5-4661-AE98-DFAB98C67AF1}
+                (string)newObjects.utilctls.ScpAggregate={2E98DDC5-3BFD-4794-8F7B-2DADF42659BD}
+                (string)newObjects.Scphost.ScpMan2={6CEAA772-C22C-11d4-9979-0040332BA2EA}
+                (string)newObjects.utilctls.ScriptManager={6CEAA772-C22C-11d4-9979-0040332BA2EA}
+                (string)newObjects.binsrv.DirStorage={8C5ED567-C721-4B29-8C06-3262AEDFE233}
+                (string)newObjects.utilctls.SFDrive={BE7887BA-10AA-47B5-BBEC-31617CCA5FB1}
+                (string)newObjects.utilctls.SFField={5F88FA0B-BEC0-41B9-82A1-B67B4F187AE5}
+                (string)newObjects.binsrv.FileStream={1C89ABD6-F168-46A2-A562-A192DB1BC24D}
+                (string)newObjects.utilctls.SFFilter={4A467FBB-711D-423A-947B-85FADC8B0913}
+                (string)newObjects.utilctls.SFMain={F86AC6C2-5578-4AE8-808A-DC5DAA78082A}
+                (string)newObjects.utilctls.SFRecord={52CA1847-DDB9-49BB-96F4-099C6BC3B7E8}
+                (string)newObjects.utilctls.ShellLink={70BD6BA6-C316-4CD5-9E95-A5BEA443ABAC}
+                (string)newObjects.utilctls.SFStorage={59B71984-3121-402E-A110-0B54BDC3EF32}
+                (string)newObjects.utilctls.SFStream={81D1E083-2C7F-4EFA-A45F-58A93B513A33}
+                (string)newObjects.utilctls.TypeConvertor={2D9B783F-8DB3-4E5E-83F7-7367AB690346}
+                (string)newobjects.utilctls.StringList={94A837D0-193F-11D5-999C-0040332BA2EA}
+                (string)newobjects.utilctls.VarDictionary={94A837CE-193F-11D5-999C-0040332BA2EA}
+                (string)newObjects.utilctls.VaryDisp={0EBC57D2-59B0-4407-B42E-B886FA17DEFC}
+                (string)newObjects.utilctls.VaryDispCreator={835294A3-F1D0-4DFB-9C02-464178AE7416}
+                (string)newObjects.utilctls.SFBinaryData={6FD08154-39CA-47AE-9299-6E37D7A894DB}
+            } COMMAP;
+            { Processor:
+                { Procent: (HTMLEmbedSearcher.newObjects.ASPProcents)
+                    (string)test=value
+                } Procent;
+                { Comment: (HTMLEmbedSearcher.newObjects.HTMLComment)
+                    (string)test=value
+                } Comment;
+                { SCRIPT: (HTMLEmbedSearcher.newObjects.HTMLTagSearch)
+                    (string)TagName=SCRIPT
+                    (int)HasClosing=1
+                    (int)NestingAllowed=0
+                    (int)ContentID=101
+                    (int)CopyContent=1
+                    (int)DisableOtherParsers=1
+                    (string)RequiredAttribute=RUNAT
+                    (string)RequiredAttributeValue=SERVER
+                } SCRIPT;
+                { OBJECT: (HTMLEmbedSearcher.newObjects.HTMLTagSearch)
+                    (string)TagName=OBJECT
+                    (int)HasClosing=1
+                    (int)NestingAllowed=0
+                    (int)ContentID=102
+                    (int)CopyContent=1
+                    (int)DisableOtherParsers=1
+                    (string)RequiredAttribute=RUNAT
+                    (string)RequiredAttributeValue=SERVER
+                } OBJECT;
+            } Processor;
+            { JScript:
+                (string)Assignment=Response.Write(%s);
+                (string)Output=Response.Write("%s");
+                (string)OutputLine=Response.Write("%s\r\n");
+                (string)escapeChar=\
+                (string)escapeChar="
+                (string)escapeWith=\\
+                (string)escapeWith=\"
+            } JScript;
+            { VBScript:
+                (string)Assignment=Response.Write %s
+                (string)Output=Response.Write "%s"
+                (string)OutputLine=Response.Write "%s" & vbCrLf
+                (string)escapeChar="
+                (string)escapeWith=""
+            } VBScript;
+            { JScript.Encode:
+                (string)Assignment=Response.Write(%s);
+                (string)Output=Response.Write("%s");
+                (string)OutputLine=Response.Write("%s\r\n");
+                (string)escapeChar=\
+                (string)escapeChar="
+                (string)escapeWith=\\
+                (string)escapeWith=\"
+            } JScript.Encode;
+            { VBScript.Encode:
+                (string)Assignment=Response.Write %s
+                (string)Output=Response.Write "%s"
+                (string)OutputLine=Response.Write "%s" & vbCrLf
+                (string)escapeChar="
+                (string)escapeWith=""
+            } VBScript.Encode;
+        } asp;
+        { asa: (CG.newObjects.ScriptGen)
+            (int)Timeout=60
+            (int)RequireAsynch=2
+            (int)CheckThatFileExists=2
+            (int)IsScriptEngine=1
+            (int)IISCompatible=3
+            (string)ScriptLanguage=ASA
+            (string)DefaultLanguage=VBScript
+            (int)ViewSource=2
+            (int)EnableParentPaths=1
+            { COMMAP:
+                (string)newObjects.utilctls.COMApartment={242D4FF6-766A-4208-BC0B-105F5D1176C0}
+                (string)newObjects.utilctls.COMThread={238DF0CC-1982-4D2A-9773-22795F358304}
+                (string)newObjects.utilctls.COMScriptThread={8D79C106-4807-4E49-9515-FA7DB84C7BC7}
+                (string)newObjects.utilctls.ConfigFile={262DE78D-982E-4B0F-8230-D99D079EA7FA}
+                (string)newObjects.utilctls.CustomLock={EFC453AE-071E-40DF-A679-A8867C3C6088}
+                (string)newObjects.utilctls.IniFile={BAA1BD2B-3077-11D3-959F-0040332BA2EA}
+                (string)newObjects.utilctls.Pack1Creator={06C9B1B5-13E5-4661-AE98-DFAB98C67AF1}
+                (string)newObjects.utilctls.ScpAggregate={2E98DDC5-3BFD-4794-8F7B-2DADF42659BD}
+                (string)newObjects.Scphost.ScpMan2={6CEAA772-C22C-11d4-9979-0040332BA2EA}
+                (string)newObjects.utilctls.ScriptManager={6CEAA772-C22C-11d4-9979-0040332BA2EA}
+                (string)newObjects.binsrv.DirStorage={8C5ED567-C721-4B29-8C06-3262AEDFE233}
+                (string)newObjects.utilctls.SFDrive={BE7887BA-10AA-47B5-BBEC-31617CCA5FB1}
+                (string)newObjects.utilctls.SFField={5F88FA0B-BEC0-41B9-82A1-B67B4F187AE5}
+                (string)newObjects.binsrv.FileStream={1C89ABD6-F168-46A2-A562-A192DB1BC24D}
+                (string)newObjects.utilctls.SFFilter={4A467FBB-711D-423A-947B-85FADC8B0913}
+                (string)newObjects.utilctls.SFMain={F86AC6C2-5578-4AE8-808A-DC5DAA78082A}
+                (string)newObjects.utilctls.SFRecord={52CA1847-DDB9-49BB-96F4-099C6BC3B7E8}
+                (string)newObjects.utilctls.ShellLink={70BD6BA6-C316-4CD5-9E95-A5BEA443ABAC}
+                (string)newObjects.utilctls.SFStorage={59B71984-3121-402E-A110-0B54BDC3EF32}
+                (string)newObjects.utilctls.SFStream={81D1E083-2C7F-4EFA-A45F-58A93B513A33}
+                (string)newObjects.utilctls.TypeConvertor={2D9B783F-8DB3-4E5E-83F7-7367AB690346}
+                (string)newobjects.utilctls.StringList={94A837D0-193F-11D5-999C-0040332BA2EA}
+                (string)newobjects.utilctls.VarDictionary={94A837CE-193F-11D5-999C-0040332BA2EA}
+                (string)newObjects.utilctls.VaryDisp={0EBC57D2-59B0-4407-B42E-B886FA17DEFC}
+                (string)newObjects.utilctls.VaryDispCreator={835294A3-F1D0-4DFB-9C02-464178AE7416}
+                (string)newObjects.utilctls.SFBinaryData={6FD08154-39CA-47AE-9299-6E37D7A894DB}
+            } COMMAP;
+            { Processor:
+                { Comment: (HTMLEmbedSearcher.newObjects.HTMLComment)
+                    (string)test=value
+                } Comment;
+                { SCRIPT: (HTMLEmbedSearcher.newObjects.HTMLTagSearch)
+                    (string)TagName=SCRIPT
+                    (int)HasClosing=1
+                    (int)NestingAllowed=0
+                    (int)ContentID=101
+                    (int)CopyContent=1
+                    (int)DisableOtherParsers=1
+                    (string)RequiredAttribute=RUNAT
+                    (string)RequiredAttributeValue=SERVER
+                } SCRIPT;
+                { OBJECT: (HTMLEmbedSearcher.newObjects.HTMLTagSearch)
+                    (string)TagName=OBJECT
+                    (int)HasClosing=1
+                    (int)NestingAllowed=0
+                    (int)ContentID=102
+                    (int)CopyContent=1
+                    (int)DisableOtherParsers=1
+                    (string)RequiredAttribute=RUNAT
+                    (string)RequiredAttributeValue=SERVER
+                } OBJECT;
+            } Processor;
+            { JScript:
+                (string)Assignment=Response.Write(%s);
+                (string)Output=Response.Write("%s");
+                (string)OutputLine=Response.Write("%s\r\n");
+                (string)escapeChar=\
+                (string)escapeChar="
+                (string)escapeWith=\\
+                (string)escapeWith=\"
+            } JScript;
+            { VBScript:
+                (string)Assignment=Response.Write %s
+                (string)Output=Response.Write "%s"
+                (string)OutputLine=Response.Write "%s" & vbCrLf
+                (string)escapeChar="
+                (string)escapeWith=""
+            } VBScript;
+            { JScript.Encode:
+                (string)Assignment=Response.Write(%s);
+                (string)Output=Response.Write("%s");
+                (string)OutputLine=Response.Write("%s\r\n");
+                (string)escapeChar=\
+                (string)escapeChar="
+                (string)escapeWith=\\
+                (string)escapeWith=\"
+            } JScript.Encode;
+            { VBScript.Encode:
+                (string)Assignment=Response.Write %s
+                (string)Output=Response.Write "%s"
+                (string)OutputLine=Response.Write "%s" & vbCrLf
+                (string)escapeChar="
+                (string)escapeWith=""
+            } VBScript.Encode;
+        } asa;
+        { js-script: (CG.newObjects.ScriptGen)
+            (int)RequireAsynch=2
+            (int)Timeout=60
+            (int)IsScriptEngine=1
+            (int)CheckThatFileExists=1
+            (string)ScriptLanguage=JScript
+            (int)EnableParentPaths=1
+        } js-script;
+        { vb-script: (CG.newObjects.ScriptGen)
+            (int)RequireAsynch=2
+            (int)Timeout=60
+            (int)IsScriptEngine=1
+            (int)CheckThatFileExists=1
+            (string)ScriptLanguage=VBScript
+            (int)EnableParentPaths=1
+        } vb-script;
+        { jse-script: (CG.newObjects.ScriptGen)
+            (int)RequireAsynch=2
+            (int)Timeout=60
+            (int)IsScriptEngine=1
+            (int)CheckThatFileExists=1
+            (string)ScriptLanguage=JScript.Encode
+            (int)EnableParentPaths=1
+        } jse-script;
+        { vbe-script: (CG.newObjects.ScriptGen)
+            (int)RequireAsynch=2
+            (int)Timeout=60
+            (int)IsScriptEngine=1
+            (int)CheckThatFileExists=1
+            (string)ScriptLanguage=VBScript.Encode
+            (int)EnableParentPaths=1
+        } vbe-script;
+        { exe: (CG.newObjects.GateCGI)
+            (int)Timeout=60
+            (int)RequireAsynch=2
+            (int)CheckThatFileExists=1
+        } exe;
+        { cmd: (CG.newObjects.GateCGI)
+            (int)Timeout=60
+            (int)RequireAsynch=2
+            (int)CheckThatFileExists=1
+            { ENVIRONMENT:
+                (string)REDIRECT_STATUS=OK
+            } ENVIRONMENT;
+        } cmd;
+        { aphp: (CG.newObjects.GateCGI)
+            (string)Engine=c:\PHP\PHP.EXE %s %q
+            (int)IsScriptEngine=1
+            (int)Timeout=60
+            (int)RequireAsynch=2
+            (int)CheckThatFileExists=1
+            (int)ShowErrOutputSample=1
+            { ENVIRONMENT:
+                (string)REDIRECT_STATUS=OK
+            } ENVIRONMENT;
+        } aphp;
+        { html-tml: (CG.newObjects.SimpleTemplate)
+            (int)RequireAsynch=1
+            (int)Timeout=60
+            (int)CheckThatFileExists=1
+            (int)IsScriptEngine=1
+            { FileTypes:
+                (string)*=text/html
+            } FileTypes;
+        } html-tml;
+    } ExecutionMap;
+    { InternalExecutionMap:
+        { Directory: (CG.newObjects.DirList)
+            (string).ListTemplate=ListTemplate.htm
+            (int)RequireAsynch=0
+            (string)IndexFilename=descript.ion
+        } Directory;
+        { File: (CG.newObjects.RawSpool)
+            (int)RequireAsynch=1
+            (int)CheckThatFileExists=1
+            (int)NoBuffering=0
+            { FileTypes:
+                (string)*=application/octet-stream
+                (string)css=text/css
+                (string)htm=text/html
+                (string)html=text/html
+                (string)txt=text/plain
+                (string)text=text/plain
+                (string)c=text/plain
+                (string)h=text/plain
+                (string)cpp=text/plain
+                (string)bmp=image/bmp
+                (string)wmf=image/x-wmf
+                (string)gif=image/gif
+                (string)jpeg=image/jpeg
+                (string)jpe=image/jpeg
+                (string)jpg=image/jpeg
+                (string)png=image/x-png
+                (string)tif=image/tiff
+                (string)cmx=image/x-cmx
+                (string)wav=audio/wav
+                (string)aiff=audio/x-aiff
+                (string)aif=audio/x-aiff
+                (string)aifc=audio/x-aiff
+                (string)au=audio/basic
+                (string)avi=video/avi
+                (string)mpeg=video/mpeg
+                (string)mpg=video/mpeg
+                (string)mid=audion/midi
+                (string)rmi=audion/midi
+                (string)doc=application/msword
+                (string)dot=application/msword
+                (string)eps=application/postscript
+                (string)pdf=application/pdf
+                (string)rtf=text/richtext
+                (string)js=application/x-javascript
+                (string)jscript=application/x-javascript
+                (string)vbs=application/x-vbscript
+                (string)clp=application/x-msclip
+                (string)uds=application/unified-data-stream
+            } FileTypes;
+            { ForceDownload:
+                (int)pdf=0
+            } ForceDownload;
+            { ForceInline:
+                (int)bmp=1
+            } ForceInline;
+        } File;
+    } InternalExecutionMap;
+    { Options:
+        (int)SiteObjectsExpireTime=10000
+        (int)ApplicationExpireTime=10000
+        (int)SessionExpireTime=20
+        (int)OutputBufferMaxSize=100000000
+        (int)ThreadLimit=2
+        (int)ThreadPriority=0
+        (int)RequireALPFrame=120
+        (string)RequireAppId=SQLiteDBManager
+    } Options;
+} APPLICATION;
