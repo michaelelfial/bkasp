@@ -571,4 +571,19 @@
 	</div>
 </div>
 
+<div id="Djamdji_UIExperiment1">
+    <div class="f_windowframe window_template" data-key="_window" >
+        <div data-key="_windowcaption" class="f_windowcaption" style="height:20px;cursor: pointer;" 
+			data-sys-height="true" data-sys-draghandle="true"
+				data-on-dblclick="{bind source=_window path=toggleMaximize}"
+			>
+            <span data-bind-text="{read source=_window path=$caption}"></span>
+            <span data-class="PlaceHolder" 
+				data-bind-$template="{read path=inject}"></span>
+        </div>
+        <div data-key="_client" style="position: relative;background-color: #FFFFFF;"></div>
+    </div>
+</div>
+
+
 </div>

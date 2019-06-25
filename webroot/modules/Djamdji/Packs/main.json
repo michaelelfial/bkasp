@@ -1,0 +1,8 @@
+{
+	ismultiple: false,
+	view: "main",
+	select: {
+		data: {}
+	}
+	
+}
