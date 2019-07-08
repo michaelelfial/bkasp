@@ -16,12 +16,17 @@ ServiceClientApp.prototype.onConnectSvc = function() {
 		this.svcApp = this.gate.bindAppByClassName("ExperimentalServiceApp");
 		this.svc1 = this.svcApp.GetInterface("IExampleServiceInterface");
 		this.svc2 = this.svcApp.GetInterface("IExampleServiceInterface2");
+		this.svc1.sampleevent.add(new Delegate(this,this.onSampleEvent))
 		this.results.connected = "Connected svcApp:" + (this.svcApp?"OK":"FAIL") + ", svc1:" + (this.svc1?"OK":"FAIL") + ", svc2:" + (this.svc2?"OK":"FAIL");
 		this.updateDisplay();
 	}
 }
+ServiceClientApp.prototype.onSampleEvent = function() {
+	alert("Sample event happened!");
+}
 ServiceClientApp.prototype.onDirtyDisconnectSvc = function() {
 	this.gate.releaseAll();
+	this.svcApp = null;
 }
 ServiceClientApp.prototype.onIESI1Method1 = function() {
 	if (this.svc1 != null) {

@@ -51,7 +51,8 @@ ExperimentalServiceApp.prototype.initialize = function (callback, args) {
 		WindowStyleFlags.visible | WindowStyleFlags.fillparent | WindowStyleFlags.parentnotify | WindowStyleFlags.adjustclient,
 		this.root,
 		{
-			view: '<div data-class="TrivialView">Service server<div data-class="Repeater" data-bind-$items="{read service=ExperimentalServiceApp path=$log readdata=$logchanged}">\
+			view: '<div data-class="TrivialView">Service server<br/><input type="button" value="sampleevent" data-on-click="{bind service=ExperimentalServiceApp path=svc1.fireEvent}"/>\
+					<div data-class="Repeater" data-bind-$items="{read service=ExperimentalServiceApp path=$log readdata=$logchanged}">\
 					<div style="border-bottom: ipx solid black" data-bind-text="{read}"></div>\
 					</div></div>',
 			directData: {}
