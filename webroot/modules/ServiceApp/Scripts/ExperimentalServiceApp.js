@@ -1,6 +1,7 @@
-function ExperimentalServiceApp() {
+function ExperimentalServiceApp(gate) {
 	AppBaseEx.apply(this, arguments);
 	this.svc1 = new ExampleServiceClass();
+	this.gate = gate;
 }
 ExperimentalServiceApp.Inherit(AppBaseEx,"ExperimentalServiceApp");
 ExperimentalServiceApp.Implement(IPlatformUtilityImpl, "ServiceApp");
@@ -60,7 +61,20 @@ ExperimentalServiceApp.prototype.initialize = function (callback, args) {
 	
 	return op;
 }
-ExperimentalServiceApp.prototype.run = function(args) {}
+ExperimentalServiceApp.prototype.run = function(args) {
+	// Use local API to access appdata
+	var appData = this.gate.api(IAppDataApi);
+	if (appData != null) {
+		var appDataReader = appData.getContentReader("ExperimentalServiceApp");
+		var s = appDataReader.content("texts/text1");
+		if (s != null) {
+			this.log(s);
+		} else {
+			this.log("read nothing from app data");
+		}
+		
+	}
+}
 ExperimentalServiceApp.prototype.shutdown = function () {
     var op = new Operation();
 	op.CompleteOperation(true, null); // What are we going to return here (or not)?
