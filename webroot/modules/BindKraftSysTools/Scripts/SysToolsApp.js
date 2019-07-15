@@ -6,6 +6,7 @@ function SysToolsApp(qbface) {
 SysToolsApp.Inherit(AppBase, "SysToolsApp");
 SysToolsApp.Implement(IPlatformUtilityImpl, "BindKraftSysTools");
 SysToolsApp.Implement(IProcessAcceleratorsImpl);
+SysToolsApp.Implement(IRequiresQueryBack);
 SysToolsApp.registerShellCommand("systools", "sys", function () {
     Shell.launchAppWindow("SysToolsApp");
 }, "A collection of diagnostic and system maintenance client-side tools (UI).");

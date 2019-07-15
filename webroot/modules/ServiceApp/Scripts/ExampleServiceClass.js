@@ -14,7 +14,7 @@ ExampleServiceClass.prototype.Method2 = function(a,b) {
 	return a + " " + b;
 }
 ExampleServiceClass.prototype.fireEvent = function(data) {
-	this.sampleevent.invoke(this, data);
+	this.sampleevent.invoke(this, "asasfsdfsdfsdfsd");
 }
 ExampleServiceClass.prototype.GetInterface = function(iface) {
 	var ifname = Class.getInterfaceName(iface);
