@@ -21,8 +21,10 @@ ServiceClientApp.prototype.onConnectSvc = function() {
 		this.updateDisplay();
 	}
 }
-ServiceClientApp.prototype.onSampleEvent = function() {
-	alert("Sample event happened!");
+ServiceClientApp.prototype.onSampleEvent = function(sender, data) {
+	alert("Sample event happened with data: " + data);
+	sender.Method1();
+	
 }
 ServiceClientApp.prototype.onDirtyDisconnectSvc = function() {
 	this.gate.releaseAll();
