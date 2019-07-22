@@ -1107,5 +1107,5 @@
 	</div>
 </div>
 <div class="systools_control-appindicator">
-<span data-bind-text="{read source=__control path=$windows}"></span>
+<div data-bind-text="{read source=__control path=$windows}" style="background-color: #FFFFFF; color: #000000;width:100%;height:100%;text-align: center; vertical-align:middle;"></div>
 </div>

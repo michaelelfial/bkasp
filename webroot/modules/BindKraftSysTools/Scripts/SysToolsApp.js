@@ -1,12 +1,13 @@
 // SysToolsApp
-function SysToolsApp(qbface) {
+function SysToolsApp(appGate) {
     AppBase.apply(this, arguments);
-	this.$qb = qbface;
+	//this.$qb = qbface;
+	this.gate = appGate;
 }
 SysToolsApp.Inherit(AppBase, "SysToolsApp");
 SysToolsApp.Implement(IPlatformUtilityImpl, "BindKraftSysTools");
 SysToolsApp.Implement(IProcessAcceleratorsImpl);
-SysToolsApp.Implement(IRequiresQueryBack);
+SysToolsApp.Implement(ISysToolsAppTrack);
 SysToolsApp.registerShellCommand("systools", "sys", function () {
     Shell.launchAppWindow("SysToolsApp");
 }, "A collection of diagnostic and system maintenance client-side tools (UI).");
@@ -18,22 +19,20 @@ SysToolsApp.prototype.toolUrl = function (toolname) {
     //This is a little hepler to avoid repeating things over and over.
     return this.moduleUrl("r", "systools", toolname);
 }
+SysToolsApp.prototype.GetInterface = function(iface) {
+	var ifcname = Class.getInterfaceName(iface);
+	switch (ifcname) {
+		case "ISysToolsAppTrack":
+			return this;
+		case "IManagedInterface":
+			return this;
+	}
+	return null;
+}
 SysToolsApp.prototype.fireNumWindows = function() {
-	if (this.$qb) {
-		if (this.pages && this.pages.children) {
-			var count = this.pages.children.length;
-			this.$qb.leasedDispatch(this,"windows").invoke(this,count);
-		}
-	}
-}
-SysToolsApp.prototype.subscribeForWindows = function(client) {
-	if (this.$qb) {
-		this.$qb.subscribeClientFor(this, "windows", client)
-	}
-}
-SysToolsApp.prototype.unSubscribeForWindows = function(client) {
-	if (this.$qb) {
-		this.$qb.unsubscribeClientFor(this, "windows", client)
+	if (this.pages && this.pages.children) {
+		var count = this.pages.children.length;
+		this.numwindows.invoke(count);
 	}
 }
 SysToolsApp.prototype.appinitialize = function (callback, args) {
