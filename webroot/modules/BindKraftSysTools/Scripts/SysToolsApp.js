@@ -27,7 +27,8 @@ SysToolsApp.prototype.GetInterface = function(iface) {
 		case "IManagedInterface":
 			return this;
 	}
-	return null;
+	return AppBase.prototype.GetInterface.call(this,iface);
+	//return null;
 }
 SysToolsApp.prototype.fireNumWindows = function() {
 	if (this.pages && this.pages.children) {
